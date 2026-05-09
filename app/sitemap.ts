@@ -1,0 +1,20 @@
+import type { MetadataRoute } from 'next';
+
+export default function sitemap(): MetadataRoute.Sitemap {
+  const base = 'https://zainazhar.vercel.app';
+  const lastModified = new Date();
+  return [
+    {
+      url: `${base}/`,
+      lastModified,
+      changeFrequency: 'weekly',
+      priority: 1.0,
+    },
+    {
+      url: `${base}/job-seekers`,
+      lastModified,
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
+  ];
+}
