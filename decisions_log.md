@@ -156,3 +156,12 @@
 - a11y: scroll-margin-top 5rem on anchor targets so sticky nav (h-16) does not cover headings when jumping via #anchors.
 - a11y: prefers-reduced-motion media query nukes animations and transitions for users who request it.
 - LOCKED: security headers list and skip-link pattern. Do not remove without explicit prompt.
+
+## 2026-05-09 — P14 VERCEL_DEPLOY locked
+- Git initialized and initial commit created.
+- Vercel zero-cost deployment pipeline instructions provided to user.
+- Project v1 is complete and ready for production.
+
+## 2026-05-09 — Module Resolution Fix
+- Renamed/Verified ContactForm.tsx casing for Linux compatibility.
+- Verified import statement in Contact.tsx matches filename casing exactly.

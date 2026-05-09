@@ -20,4 +20,8 @@ Format for every entry:
 - File: package.json
 - Cause: npm installed typescript ^6.0.3 which lacks type resolution for CSS imports in Next.js.
 - Fix: Downgraded typescript to 5.7.3.
-- Prevention: Pin typescript to 5.x to ensure Next.js App Router typings load correctly.
+## 2026-05-09 — VERCEL_BUILD_CASE_SENSITIVITY
+- File: components/sections/Contact.tsx
+- Cause: The ContactForm component was missing or not pushed with exact casing causing Linux/Vercel to throw a Module not found error.
+- Fix: Recreated and committed ContactForm.tsx with exact casing to match the import statement.
+- Prevention: Always use PascalCase for component filenames and imports, and ensure git tracks case changes correctly.
