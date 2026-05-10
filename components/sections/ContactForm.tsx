@@ -3,15 +3,43 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 
+// Web3Forms Setup
+// Registered to: zeecareers07@gmail.com
+// Do not modify this key without explicit authorization.
+const WEB3FORMS_ACCESS_KEY: string = 'f3d3221c-033c-4e1a-96cb-2ab6ccb7307c';
+
 export function ContactForm() {
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    
+    if (WEB3FORMS_ACCESS_KEY === 'WEB3FORMS_ACCESS_KEY') {
+      console.error('Web3Forms access key not configured');
+      setStatus('error');
+      return;
+    }
+    
     setStatus('submitting');
-    // Simulate network request
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    setStatus('success');
+    
+    const formData = new FormData(e.currentTarget);
+    formData.append('access_key', WEB3FORMS_ACCESS_KEY);
+
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formData
+      });
+
+      if (response.ok) {
+        setStatus('success');
+      } else {
+        setStatus('error');
+      }
+    } catch (error) {
+      console.error(error);
+      setStatus('error');
+    }
   }
 
   if (status === 'success') {
@@ -27,6 +55,7 @@ export function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} className="mt-8 space-y-6">
+      <input type="checkbox" name="botcheck" className="hidden" style={{ display: 'none' }} />
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
         <div className="space-y-2">
           <label htmlFor="name" className="text-small font-medium text-navy">
@@ -87,6 +116,11 @@ export function ContactForm() {
       >
         {status === 'submitting' ? 'Sending...' : 'Send Message'}
       </Button>
+      {status === 'error' && (
+        <p className="text-center text-sm text-red-500 mt-4">
+          Something went wrong. Please try again later.
+        </p>
+      )}
     </form>
   );
 }

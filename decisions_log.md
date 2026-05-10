@@ -172,3 +172,11 @@
 - next.config.mjs: added experimental.optimizePackageImports for lucide-react. Pre-emptive optimization for any future icon imports.
 - package.json: added browserslist targeting modern browsers (Chrome 100+, Firefox 100+, Safari 15+, Edge 100+). Drops legacy JS polyfills from production bundle, saves ~11 KiB. Excludes IE 11 and Opera Mini explicitly.
 - LOCKED: browserslist targets. Updating these requires explicit prompt.
+
+## 2026-05-10 — P16 WEB3FORMS_ACTIVATE locked
+- Web3Forms access key f3d3221c-033c-4e1a-96cb-2ab6ccb7307c installed in components/sections/ContactForm.tsx.
+- Key registered to email: zeecareers07@gmail.com.
+- Contact form is now LIVE in production. Submissions will land in the registered inbox.
+- Key is intentionally client-side (Web3Forms design): keys can only submit to their registered inbox, so public exposure carries no risk.
+- LOCKED: do not modify the access key without an explicit prompt. If the key needs rotating, generate a new one at web3forms.com under the same email, then send a P-prompt referencing this entry.
+- Loose thread from P14 deployment: CLOSED.
