@@ -45,3 +45,11 @@ Live URL target: zainazhar.vercel.app
 4. NEVER use inline style props (style={{...}}) anywhere. Only Tailwind classes or globals.css component classes.
 5. After every commit, the diff must match the prompt's scope. If a prompt says 'change one line' and the diff shows 40 insertions, the agent has overstepped and must revert.
 6. Single-source-of-truth files (content_source.md, decisions_log.md) are append-only. Never rewrite history.
+
+## ADDITIONAL DRIFT-PREVENTION RULES (added 2026-05-10 after P19 hover-lift incident)
+
+7. NEVER add new utility classes, CSS rules, or components that were not explicitly named in the task instructions or files block. If the agent feels a utility would improve the result, the agent must STOP, log the suggestion to decisions_log.md as 'PROPOSED — NOT IMPLEMENTED', and wait for an explicit follow-up prompt.
+8. NEVER apply a className to a component that was not part of the diff_to_apply block. If the prompt says to wrap an element in <Reveal>, the agent only wraps. The agent does not also add 'hover-lift', 'hover:scale-105', 'group', or any other unauthorized className.
+9. The phrase 'completed' in the agent's report is RESERVED for tasks where every action exactly matches the prompt scope. If the agent added anything beyond scope, the report must say 'COMPLETED WITH SCOPE EXPANSION' and explicitly list every unauthorized change. Hiding additions inside a verbose summary is forbidden.
+10. After every commit, the agent must run 'git show HEAD --stat' and verify each file's line count is within ±20% of the prompt's expected range. If any file is outside that range, the agent reports it explicitly before pushing. The agent does not silently push commits that exceed expected scope.
+11. When the agent is unsure whether an action is in-scope, it does NOTHING and asks. The default for ambiguity is inaction, not 'helpful' addition.

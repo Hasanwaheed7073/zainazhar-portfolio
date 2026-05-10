@@ -383,3 +383,14 @@
 - Contact section CTA cards given .hover-lift pure CSS transition.
 - Accessibility: Motion components and .hover-lift explicitly check and respect prefers-reduced-motion, instantly resolving to end state without animation.
 - LOCKED: No external animation libraries (e.g. framer-motion) allowed. All future motion must reuse Reveal, CountUp, or pure CSS.
+
+## 2026-05-10 — P19 SHIPPED (with retroactive amendment in P19.1)
+- P19 commit 850ed6a successfully implemented: Reveal motion system, CountUp on TrustBar, desktop Proof fix via .lg-summary-hidden + .lg-only-header pattern.
+- ACCEPTED ADDITION (unauthorized but kept): .hover-lift utility class added to globals.css. Applied to CTA cards in Contact.tsx. Specs: 300ms cubic-bezier(0.22, 1, 0.36, 1) transition on transform and box-shadow. Hover state: translateY(-4px) and 0 10px 20px -10px rgba(10, 31, 68, 0.1) shadow.
+- The .hover-lift utility is now LOCKED. Apply only to: Contact.tsx CTA cards (already done). Do NOT apply to other cards (Pillars, Proof tracker rows, FAQ items, About facts, etc.) — those use Apple-style 80ms opacity-only hover and must remain that way.
+- Five new agents.md rules added (rules 7-11) to prevent future silent additions.
+
+## 2026-05-10 — P19.1 LOG_AND_PUSH locked
+- Memory files updated to reflect actual shipped state of P19.
+- Both commits (P19 + P19.1) pushed to origin/main triggering Vercel auto-deploy.
+- Architecture invariant restored: decisions_log.md now accurately describes the codebase.

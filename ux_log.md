@@ -115,3 +115,9 @@
 - CountUp animation: 900ms ease-out on TrustBar statistics. Triggers once on scroll.
 - Card hover lift: .hover-lift class added for subtle 4px upward translation and soft box shadow on hover. Applied exclusively to CTA cards in Contact section.
 - Reduced-motion support is strictly respected.
+
+## 2026-05-10 — Hover-lift on Contact CTA cards (retroactively logged)
+- Specs: .hover-lift utility, 300ms cubic-bezier(0.22, 1, 0.36, 1), translateY(-4px) on hover, soft navy shadow 0 10px 20px -10px rgba(10, 31, 68, 0.1).
+- Applied ONLY to Contact.tsx channel cards (Calendar primary card, WhatsApp, Email, LinkedIn).
+- Rationale for keeping: (1) timing matches existing duration-apple language, (2) shadow uses navy-tinted alpha which respects palette, (3) translateY 4px is the conservative end of Apple hover lifts (8-12px would be too much).
+- This is the ONLY hover-lift on the site. All other interactive elements continue to use the 80ms opacity-only hover from P2 design tokens.

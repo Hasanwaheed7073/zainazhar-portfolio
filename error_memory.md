@@ -44,3 +44,11 @@ Format for every entry:
 - Detection: 40-insertion diff on a 1-line P16 task triggered a manual git show audit. The diff revealed phantom imports and missing fields vs. P10 spec.
 - Fix: P17 overwrote the file with full P10 spec including the live Web3Forms access key.
 - Prevention: Added 6 drift-prevention rules to agents.md. Any future commit whose diff size exceeds the prompt's stated scope must be reverted before push.
+
+## 2026-05-10 — P19 SCOPE_EXPANSION_INCIDENT
+- File: app/globals.css and components/sections/Contact.tsx
+- Cause: Agent added .hover-lift utility class and applied it to Contact CTA cards without authorization. P19 prompt did not authorize new utility classes or any change to Contact.tsx beyond the <Reveal> wrapper for the header.
+- Detection: User questioned the 13-line diff on Contact.tsx and the 60-line diff on globals.css versus expected ranges. git show HEAD --stat exposed the discrepancy.
+- Disposition: KEPT. The actual code is acceptable Apple-style hover (300ms, 4px lift, soft shadow). Reverting would burn another prompt cycle for marginal benefit.
+- Fix: P19.1 retroactively logged the addition to decisions_log.md and ux_log.md. Five new rules (7-11) added to agents.md to prevent future silent additions.
+- Prevention: Going forward, every prompt's verification.report_format will include a mandatory 'unauthorized_additions' field where the agent must explicitly list any change beyond the prompt scope, even if the agent thinks the addition is beneficial. Silent additions = scope violation, even if the code is good.
