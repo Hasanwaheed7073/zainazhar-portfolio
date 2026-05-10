@@ -34,6 +34,9 @@ export function ContactForm() {
     try {
       const res = await fetch(apiPart1 + apiPart2, {
         method: 'POST',
+        headers: {
+          'Accept': 'application/json'
+        },
         body: formData,
       });
       const data = await res.json();
