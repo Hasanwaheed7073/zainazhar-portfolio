@@ -12,8 +12,8 @@ export function Footer() {
   const year = new Date().getFullYear();
   return (
     <footer className="border-t border-line bg-surface">
-      <Container as="div" className="py-16">
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-3">
+      <Container as="div" className="py-12 md:py-16">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
           {/* Brand + tagline */}
           <div>
             <p className="text-h3 font-semibold text-navy">Zain Azhar</p>

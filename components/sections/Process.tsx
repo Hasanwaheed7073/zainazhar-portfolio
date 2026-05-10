@@ -74,7 +74,7 @@ export function Process() {
         </ol>
 
         {/* Closing CTA strip */}
-        <div className="mt-20 flex flex-col items-start justify-between gap-6 rounded-card border border-line bg-surface p-8 md:flex-row md:items-center md:p-10">
+        <div className="mt-20 flex flex-col items-start justify-between gap-5 rounded-card border border-line bg-surface p-6 md:flex-row md:items-center md:p-10">
           <div className="max-w-prose-tight">
             <p className="text-h3 font-semibold text-navy">Ready to integrate execution into your coaching?</p>
             <p className="mt-2 text-body text-ink-muted">A 30-minute call is enough to know if the fit is right.</p>

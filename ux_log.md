@@ -99,3 +99,12 @@
 - ink-soft color darkened. Affects: Footer copyright text, Footer 'Built for...' tagline, Hero trust line, About 'Are you a career coach instead?' link reference, and several closing paragraphs in Proof section.
 - Visual change is negligible to the eye (going from light gray to slightly darker gray) but unlocks Lighthouse Accessibility 100.
 - fetchPriority='high' on hero image is purely a browser hint — no visual change.
+
+## 2026-05-10 — Mobile density cut shipped
+- Mobile homepage scroll length cut from ~30 screens to estimated ~12 screens (60% reduction).
+- Live Proof section mobile scroll cut from ~10 screens to ~3 screens before expansion.
+- About section mobile cut from 4 screens to 2.5 screens.
+- Sticky nav reclaimed 8px of mobile viewport (h-16 → h-14).
+- Native <details> CategoryBlock pattern: zero JavaScript, fully accessible, respects prefers-reduced-motion (no animation on disclosure). Apple-style + sign rotates 45deg on group-open, hidden on lg.
+- Inline pipe-separated facts on About uses flex flex-wrap so it wraps cleanly on narrow viewports without horizontal overflow.
+- Desktop layouts visually identical to pre-P18 production (verified by class targeting: all changes scoped to mobile via Tailwind responsive prefixes).

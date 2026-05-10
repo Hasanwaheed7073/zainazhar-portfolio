@@ -11,7 +11,7 @@ const NAV_LINKS = [
 export function Nav() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-line bg-surface/85 backdrop-blur-md">
-      <Container as="div" className="flex h-16 items-center justify-between">
+      <Container as="div" className="flex h-14 md:h-16 items-center justify-between">
         <Link
           href="/"
           className="text-h3 font-semibold tracking-tight text-navy"
@@ -49,7 +49,7 @@ export function Nav() {
         </label>
 
         {/* Mobile menu panel */}
-        <div className="absolute left-0 right-0 top-16 hidden peer-checked:block md:peer-checked:hidden border-b border-line bg-surface">
+        <div className="absolute left-0 right-0 top-14 md:top-16 hidden peer-checked:block md:peer-checked:hidden border-b border-line bg-surface">
           <Container as="div" className="py-4 flex flex-col gap-4">
             {NAV_LINKS.map((l) => (
               <Link

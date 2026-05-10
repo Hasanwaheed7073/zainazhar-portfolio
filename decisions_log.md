@@ -364,3 +364,12 @@
 - Added 6 drift-prevention rules to agents.md.
 - Logged incident to error_memory.md as P17 CONTACTFORM_DRIFT_INCIDENT.
 - LOCKED: ContactForm.tsx structure. Any future change requires a prompt referencing P10 or P17 by ID.
+
+## 2026-05-10 — P18 MOBILE_DENSITY_CUT locked
+- Nav: h-14 on mobile, h-16 on desktop. Mobile menu panel top offset adjusted to top-14 md:top-16 to match.
+- Proof: Restructured into a CategoryBlock pattern using native <details>. Master docs stay always visible (2 large cards). Categories (General Role + Healthcare Specialty) are collapsed by default on mobile, expanded by default on desktop (lg breakpoint and above) via the lg:open class plus lg:list-none and lg:hidden on the toggle indicator. Mobile users tap the category header to reveal trackers. Desktop users see everything by default.
+- About: Replaced 6-row <dl> facts table with single inline pipe-separated <ul>. Saves a full screen of mobile vertical space. Stats: Albany NY · 5+ years executing · 300+ clients · 400+ interviews · US, UK, Canada · 8,300+ LinkedIn followers.
+- Process: Closing CTA strip padding reduced from p-8 to p-6 on mobile (md:p-10 retained for desktop). Gap reduced from gap-6 to gap-5 on mobile.
+- Footer: py-16 reduced to py-12 on mobile (md:py-16 retained). Grid gap reduced from gap-10 to gap-8 on mobile.
+- LOCKED: Mobile-first density philosophy. Future sections must respect mobile breathing room before desktop polish.
+- LOCKED: Native <details>/<summary> pattern for any progressive-disclosure UI. NO JS-based collapses.

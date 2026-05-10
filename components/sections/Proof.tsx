@@ -59,6 +59,41 @@ function LinkRow({ item }: { item: TrackerLink }) {
   );
 }
 
+function CategoryBlock({
+  title,
+  items,
+  defaultOpen = false,
+}: {
+  title: string;
+  items: TrackerLink[];
+  defaultOpen?: boolean;
+}) {
+  return (
+    <div className="mt-12 lg:mt-16">
+      {/* Mobile: collapsed by default via <details>. Desktop (lg+): always open via lg:open and lg-only summary hiding. */}
+      <details className="group lg:open" open={defaultOpen}>
+        <summary className="flex cursor-pointer items-end justify-between gap-6 border-b border-line pb-4 lg:cursor-default lg:list-none [&::-webkit-details-marker]:hidden">
+          <h3 className="text-h3 font-semibold text-navy">{title}</h3>
+          <div className="flex items-center gap-3">
+            <p className="text-small text-ink-muted">{items.length} live trackers</p>
+            <span
+              aria-hidden="true"
+              className="text-h3 font-light text-navy-500 transition-transform duration-apple group-open:rotate-45 lg:hidden"
+            >
+              +
+            </span>
+          </div>
+        </summary>
+        <ul className="mt-6 grid grid-cols-1 gap-3 md:grid-cols-2">
+          {items.map((item) => (
+            <LinkRow key={item.href} item={item} />
+          ))}
+        </ul>
+      </details>
+    </div>
+  );
+}
+
 export function Proof() {
   return (
     <section
@@ -80,8 +115,8 @@ export function Proof() {
           </p>
         </div>
 
-        {/* Master docs */}
-        <div className="mt-16 grid grid-cols-1 gap-6 md:grid-cols-2">
+        {/* Master docs — always visible */}
+        <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:mt-16">
           {MASTER_DOCS.map((doc) => (
             <a
               key={doc.label}
@@ -109,31 +144,11 @@ export function Proof() {
           ))}
         </div>
 
-        {/* General roles */}
-        <div className="mt-20">
-          <div className="flex items-end justify-between gap-6 border-b border-line pb-4">
-            <h3 className="text-h3 font-semibold text-navy">General Role Campaigns</h3>
-            <p className="text-small text-ink-muted">{GENERAL_ROLES.length} live trackers</p>
-          </div>
-          <ul className="mt-6 grid grid-cols-1 gap-3 md:grid-cols-2">
-            {GENERAL_ROLES.map((item) => (
-              <LinkRow key={item.href} item={item} />
-            ))}
-          </ul>
-        </div>
+        {/* General roles — collapsed on mobile, open on desktop */}
+        <CategoryBlock title="General Role Campaigns" items={GENERAL_ROLES} />
 
-        {/* Healthcare specialty */}
-        <div className="mt-16">
-          <div className="flex items-end justify-between gap-6 border-b border-line pb-4">
-            <h3 className="text-h3 font-semibold text-navy">Healthcare Specialty Campaigns</h3>
-            <p className="text-small text-ink-muted">{HEALTHCARE.length} live trackers</p>
-          </div>
-          <ul className="mt-6 grid grid-cols-1 gap-3 md:grid-cols-2">
-            {HEALTHCARE.map((item) => (
-              <LinkRow key={item.href} item={item} />
-            ))}
-          </ul>
-        </div>
+        {/* Healthcare specialty — collapsed on mobile, open on desktop */}
+        <CategoryBlock title="Healthcare Specialty Campaigns" items={HEALTHCARE} />
 
         {/* Closing note */}
         <p className="mt-12 max-w-prose-wide text-small text-ink-muted">
