@@ -69,9 +69,9 @@ function CategoryBlock({
 }) {
   return (
     <div className="mt-12 lg:mt-16">
-      {/* Mobile: <details> is collapsible (no open by default). Desktop: same <details> but <summary> hidden via .lg-summary-hidden, content always visible because content lives outside summary. */}
-      <details className="group lg-details-always-open">
-        <summary className="lg-summary-hidden flex cursor-pointer items-end justify-between gap-6 border-b border-line pb-4 [&::-webkit-details-marker]:hidden">
+      {/* Mobile Accordion View */}
+      <details className="group lg:hidden">
+        <summary className="flex cursor-pointer items-end justify-between gap-6 border-b border-line pb-4 [&::-webkit-details-marker]:hidden">
           <h3 className="text-h3 font-semibold text-navy">{title}</h3>
           <div className="flex items-center gap-3">
             <p className="text-small text-ink-muted">{items.length} live trackers</p>
@@ -83,8 +83,16 @@ function CategoryBlock({
             </span>
           </div>
         </summary>
-        {/* Desktop-always-visible header (replaces hidden summary on lg+) */}
-        <div className="lg-only-header hidden lg:flex lg:items-end lg:justify-between lg:gap-6 lg:border-b lg:border-line lg:pb-4">
+        <ul className="mt-6 grid grid-cols-1 gap-3">
+          {items.map((item) => (
+            <LinkRow key={item.href} item={item} />
+          ))}
+        </ul>
+      </details>
+
+      {/* Desktop Always-Open View */}
+      <div className="hidden lg:block">
+        <div className="flex items-end justify-between gap-6 border-b border-line pb-4">
           <h3 className="text-h3 font-semibold text-navy">{title}</h3>
           <p className="text-small text-ink-muted">{items.length} live trackers</p>
         </div>
@@ -93,7 +101,7 @@ function CategoryBlock({
             <LinkRow key={item.href} item={item} />
           ))}
         </ul>
-      </details>
+      </div>
     </div>
   );
 }
