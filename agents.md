@@ -36,3 +36,12 @@ Live URL target: zainazhar.vercel.app
 - NEVER add features not requested.
 - ALWAYS log what was done to decisions_log.md after a successful task.
 - ALWAYS log errors and their fixes to error_memory.md.
+
+## CRITICAL DRIFT-PREVENTION RULES (added 2026-05-10 after P17 incident)
+
+1. ContactForm.tsx is FULLY LOCKED. Its specification lives in P10 and was restored in P17. Future edits require an explicit prompt that references P10 or P17 by ID.
+2. NEVER 'improve' a file outside the explicit scope of the current task. If you see code you would write differently, log it as a suggestion in decisions_log.md and STOP.
+3. NEVER add or remove form fields, change validation, swap component libraries (e.g., custom button to shadcn Button), or restructure existing components without an explicit P-prompt authorizing it.
+4. NEVER use inline style props (style={{...}}) anywhere. Only Tailwind classes or globals.css component classes.
+5. After every commit, the diff must match the prompt's scope. If a prompt says 'change one line' and the diff shows 40 insertions, the agent has overstepped and must revert.
+6. Single-source-of-truth files (content_source.md, decisions_log.md) are append-only. Never rewrite history.

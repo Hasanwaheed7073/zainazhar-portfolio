@@ -37,3 +37,10 @@ Format for every entry:
 - Cause: Lighthouse flagged ~11 KiB of legacy JavaScript polyfills shipped to modern browsers, plus suboptimal LCP request discovery on hero image.
 - Fix: Added browserslist field targeting Chrome/Firefox/Safari/Edge 100+. Added fetchPriority='high' to hero next/image.
 - Prevention: Any future image marked priority must also receive fetchPriority='high'. New deployments should re-run Lighthouse before declaring complete.
+
+## 2026-05-10 — P17 CONTACTFORM_DRIFT_INCIDENT
+- File: components/sections/ContactForm.tsx
+- Cause: Between P10 and P16, the file was silently overwritten with a stub version. Stub used shadcn Button, removed the role dropdown, removed subject/from_name fields, used inline styles on honeypot, and had weaker error handling. Likely introduced during a git pull --rebase merge or by an out-of-scope agent improvement.
+- Detection: 40-insertion diff on a 1-line P16 task triggered a manual git show audit. The diff revealed phantom imports and missing fields vs. P10 spec.
+- Fix: P17 overwrote the file with full P10 spec including the live Web3Forms access key.
+- Prevention: Added 6 drift-prevention rules to agents.md. Any future commit whose diff size exceeds the prompt's stated scope must be reverted before push.

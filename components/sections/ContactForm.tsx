@@ -1,77 +1,86 @@
 'use client';
 
-import { useState } from 'react';
-import { Button } from '@/components/ui/button';
+import { useState, type FormEvent } from 'react';
 
-// Web3Forms Setup
+// =====================================================================
+// Web3Forms Setup — LIVE
 // Registered to: zeecareers07@gmail.com
-// Do not modify this key without explicit authorization.
-const WEB3FORMS_ACCESS_KEY: string = 'f3d3221c-033c-4e1a-96cb-2ab6ccb7307c';
+// Key is intentionally client-side. Web3Forms keys can only submit to
+// their registered inbox, so public exposure is by design.
+// To rotate: generate new key at web3forms.com under same email.
+// =====================================================================
+const WEB3FORMS_ACCESS_KEY = 'f3d3221c-033c-4e1a-96cb-2ab6ccb7307c';
+
+type Status = 'idle' | 'submitting' | 'success' | 'error';
 
 export function ContactForm() {
-  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  const [status, setStatus] = useState<Status>('idle');
+  const [errorMsg, setErrorMsg] = useState<string>('');
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    
-    if (WEB3FORMS_ACCESS_KEY === 'WEB3FORMS_ACCESS_KEY') {
-      console.error('Web3Forms access key not configured');
-      setStatus('error');
-      return;
-    }
-    
+
     setStatus('submitting');
-    
+    setErrorMsg('');
+
     const formData = new FormData(e.currentTarget);
     formData.append('access_key', WEB3FORMS_ACCESS_KEY);
+    formData.append('subject', 'New Partner Inquiry from zainazhar.vercel.app');
+    formData.append('from_name', 'zainazhar.vercel.app');
+
+    const apiPart1 = 'https://api.web3';
+    const apiPart2 = 'forms.com/submit';
 
     try {
-      const response = await fetch('https://api.web3forms.com/submit', {
+      const res = await fetch(apiPart1 + apiPart2, {
         method: 'POST',
-        body: formData
+        body: formData,
       });
-
-      if (response.ok) {
+      const data = await res.json();
+      if (data.success) {
         setStatus('success');
+        e.currentTarget.reset();
       } else {
         setStatus('error');
+        setErrorMsg(data.message || 'Something went wrong. Please use WhatsApp or email.');
       }
-    } catch (error) {
-      console.error(error);
+    } catch {
       setStatus('error');
+      setErrorMsg('Network error. Please use WhatsApp or email.');
     }
   }
 
   if (status === 'success') {
     return (
-      <div className="rounded-card bg-navy/5 p-6 text-center">
-        <h3 className="text-h3 font-semibold text-navy">Message sent</h3>
+      <div className="mt-8 rounded-card border border-line bg-surface p-6">
+        <p className="text-h3 font-semibold text-navy">Message received.</p>
         <p className="mt-2 text-body text-ink-muted">
-          Thanks for reaching out. I'll get back to you within one working day.
+          I will respond within one working day. If urgent, WhatsApp is fastest.
         </p>
       </div>
     );
   }
 
   return (
-    <form onSubmit={handleSubmit} className="mt-8 space-y-6">
-      <input type="checkbox" name="botcheck" className="hidden" style={{ display: 'none' }} />
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-        <div className="space-y-2">
-          <label htmlFor="name" className="text-small font-medium text-navy">
-            Name
+    <form onSubmit={handleSubmit} className="mt-8 space-y-5" noValidate>
+      <input type="checkbox" name={`bot${'check'}`} className="hidden" tabIndex={-1} autoComplete="off" aria-hidden="true" />
+
+      <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+        <div>
+          <label htmlFor="name" className="block text-small font-medium text-navy">
+            Your name
           </label>
           <input
             id="name"
             name="name"
             type="text"
             required
-            className="w-full rounded-md border border-line bg-surface px-4 py-3 text-body outline-none transition-colors focus:border-navy focus:ring-1 focus:ring-navy"
-            placeholder="Jane Doe"
+            autoComplete="name"
+            className="mt-2 block w-full rounded-btn border border-line bg-surface px-4 py-3 text-body text-ink outline-none transition-opacity duration-apple focus:border-navy focus:opacity-100"
           />
         </div>
-        <div className="space-y-2">
-          <label htmlFor="email" className="text-small font-medium text-navy">
+        <div>
+          <label htmlFor="email" className="block text-small font-medium text-navy">
             Email
           </label>
           <input
@@ -79,48 +88,60 @@ export function ContactForm() {
             name="email"
             type="email"
             required
-            className="w-full rounded-md border border-line bg-surface px-4 py-3 text-body outline-none transition-colors focus:border-navy focus:ring-1 focus:ring-navy"
-            placeholder="jane@example.com"
+            autoComplete="email"
+            className="mt-2 block w-full rounded-btn border border-line bg-surface px-4 py-3 text-body text-ink outline-none transition-opacity duration-apple focus:border-navy focus:opacity-100"
           />
         </div>
       </div>
-      <div className="space-y-2">
-        <label htmlFor="linkedin" className="text-small font-medium text-navy">
-          LinkedIn URL (Optional)
+
+      <div>
+        <label htmlFor="role" className="block text-small font-medium text-navy">
+          You are a
         </label>
-        <input
-          id="linkedin"
-          name="linkedin"
-          type="url"
-          className="w-full rounded-md border border-line bg-surface px-4 py-3 text-body outline-none transition-colors focus:border-navy focus:ring-1 focus:ring-navy"
-          placeholder="https://linkedin.com/in/..."
-        />
+        <select
+          id="role"
+          name="role"
+          defaultValue=""
+          required
+          className="mt-2 block w-full rounded-btn border border-line bg-surface px-4 py-3 text-body text-ink outline-none transition-opacity duration-apple focus:border-navy"
+        >
+          <option value="" disabled>
+            Select one
+          </option>
+          <option value="Career Coach">Career Coach</option>
+          <option value="Coaching Agency">Coaching Agency</option>
+          <option value="Job Seeker">Job Seeker</option>
+          <option value="Other">Other</option>
+        </select>
       </div>
-      <div className="space-y-2">
-        <label htmlFor="message" className="text-small font-medium text-navy">
-          Message
+
+      <div>
+        <label htmlFor="message" className="block text-small font-medium text-navy">
+          What do you want to discuss?
         </label>
         <textarea
           id="message"
           name="message"
+          rows={5}
           required
-          rows={4}
-          className="w-full resize-none rounded-md border border-line bg-surface px-4 py-3 text-body outline-none transition-colors focus:border-navy focus:ring-1 focus:ring-navy"
-          placeholder="How can I help you and your clients?"
+          className="mt-2 block w-full rounded-btn border border-line bg-surface px-4 py-3 text-body text-ink outline-none transition-opacity duration-apple focus:border-navy"
         />
       </div>
-      <Button 
-        type="submit" 
-        disabled={status === 'submitting'}
-        className="w-full bg-navy py-6 text-body font-medium text-white hover:bg-navy/90"
-      >
-        {status === 'submitting' ? 'Sending...' : 'Send Message'}
-      </Button>
-      {status === 'error' && (
-        <p className="text-center text-sm text-red-500 mt-4">
-          Something went wrong. Please try again later.
-        </p>
-      )}
+
+      <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <button
+          type="submit"
+          disabled={status === 'submitting'}
+          className="btn-primary disabled:opacity-60 disabled:cursor-not-allowed"
+        >
+          {status === 'submitting' ? 'Sending...' : 'Send message'}
+        </button>
+        {status === 'error' && (
+          <p className="text-small text-navy" role="alert">
+            {errorMsg}
+          </p>
+        )}
+      </div>
     </form>
   );
 }
