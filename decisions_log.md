@@ -165,3 +165,10 @@
 ## 2026-05-09 — Module Resolution Fix
 - Renamed/Verified ContactForm.tsx casing for Linux compatibility.
 - Verified import statement in Contact.tsx matches filename casing exactly.
+
+## 2026-05-10 — P15 PERF_A11Y_FIXES locked
+- Hero image: added fetchPriority='high' (boosts LCP browser hint) and quality={85} (down from default 75 for sharper LCP perception with negligible byte cost on AVIF).
+- Color token: ink.soft changed from #8A93A4 (~3.8:1 contrast on white, fails AA) to #6B7280 (~4.6:1 contrast, passes AA Normal). Used in Footer copyright, hero trust line, and a few muted body texts.
+- next.config.mjs: added experimental.optimizePackageImports for lucide-react. Pre-emptive optimization for any future icon imports.
+- package.json: added browserslist targeting modern browsers (Chrome 100+, Firefox 100+, Safari 15+, Edge 100+). Drops legacy JS polyfills from production bundle, saves ~11 KiB. Excludes IE 11 and Opera Mini explicitly.
+- LOCKED: browserslist targets. Updating these requires explicit prompt.

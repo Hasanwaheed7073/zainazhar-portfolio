@@ -45,7 +45,9 @@ export function Hero() {
                 alt="Zain Azhar, Reverse Recruiter for career coaches"
                 fill
                 priority
+                fetchPriority="high"
                 sizes="(max-width: 1024px) 80vw, 40vw"
+                quality={85}
                 className="object-cover"
               />
             </div>

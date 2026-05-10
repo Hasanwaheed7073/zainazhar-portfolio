@@ -94,3 +94,8 @@
 - Anchor scroll offset (scroll-margin-top: 5rem) prevents sticky nav from covering target headings when users click /#proof, /#process, etc.
 - Reduced-motion respect: any user with prefers-reduced-motion=reduce gets near-instant transitions. Critical for vestibular accessibility.
 - All changes invisible by default. Activated only by keyboard navigation or assistive tech.
+
+## 2026-05-10 — Contrast and LCP polish
+- ink-soft color darkened. Affects: Footer copyright text, Footer 'Built for...' tagline, Hero trust line, About 'Are you a career coach instead?' link reference, and several closing paragraphs in Proof section.
+- Visual change is negligible to the eye (going from light gray to slightly darker gray) but unlocks Lighthouse Accessibility 100.
+- fetchPriority='high' on hero image is purely a browser hint — no visual change.

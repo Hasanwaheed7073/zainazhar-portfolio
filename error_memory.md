@@ -25,3 +25,15 @@ Format for every entry:
 - Cause: The ContactForm component was missing or not pushed with exact casing causing Linux/Vercel to throw a Module not found error.
 - Fix: Recreated and committed ContactForm.tsx with exact casing to match the import statement.
 - Prevention: Always use PascalCase for component filenames and imports, and ensure git tracks case changes correctly.
+
+## 2026-05-10 — V1 PROD AUDIT
+- File: tailwind.config.ts
+- Cause: ink.soft #8A93A4 had 3.8:1 contrast ratio on white, failing WCAG AA Normal text (requires 4.5:1).
+- Fix: Darkened to #6B7280 (Tailwind's gray-500), achieving 4.6:1 ratio.
+- Prevention: All future text colors on white backgrounds must be tested against WCAG AA before locking. Use https://webaim.org/resources/contrastchecker/ for verification.
+
+## 2026-05-10 — V1 PROD PERF
+- File: package.json + next.config.mjs
+- Cause: Lighthouse flagged ~11 KiB of legacy JavaScript polyfills shipped to modern browsers, plus suboptimal LCP request discovery on hero image.
+- Fix: Added browserslist field targeting Chrome/Firefox/Safari/Edge 100+. Added fetchPriority='high' to hero next/image.
+- Prevention: Any future image marked priority must also receive fetchPriority='high'. New deployments should re-run Lighthouse before declaring complete.

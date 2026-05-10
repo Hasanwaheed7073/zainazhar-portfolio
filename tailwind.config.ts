@@ -55,7 +55,7 @@ const config = {
         ink: {
           DEFAULT: "#0B1220",
           muted: "#5B6473",
-          soft: "#8A93A4",
+          soft: "#6B7280",
         },
         navy: {
           "50": "#F4F6FB",
