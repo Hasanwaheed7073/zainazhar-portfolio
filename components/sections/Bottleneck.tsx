@@ -1,4 +1,5 @@
 import { Container } from '@/components/shared/Container';
+import { Reveal } from '@/components/shared/Reveal';
 
 const BROKEN_PATTERNS = [
   {
@@ -23,7 +24,7 @@ export function Bottleneck() {
       className="bg-surface"
     >
       <Container as="div" className="section-pad">
-        <div className="max-w-prose-wide">
+        <Reveal className="max-w-prose-wide">
           <p className="text-small font-medium uppercase tracking-[0.14em] text-ink-muted">
             The Bottleneck
           </p>
@@ -39,7 +40,7 @@ export function Bottleneck() {
           <p className="mt-4 text-lead text-ink-muted">
             That is the gap I close.
           </p>
-        </div>
+        </Reveal>
 
         <ul className="mt-16 grid grid-cols-1 gap-6 md:grid-cols-3">
           {BROKEN_PATTERNS.map((p) => (

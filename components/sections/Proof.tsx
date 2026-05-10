@@ -1,4 +1,5 @@
 import { Container } from '@/components/shared/Container';
+import { Reveal } from '@/components/shared/Reveal';
 
 type TrackerLink = { label: string; href: string };
 
@@ -62,28 +63,31 @@ function LinkRow({ item }: { item: TrackerLink }) {
 function CategoryBlock({
   title,
   items,
-  defaultOpen = false,
 }: {
   title: string;
   items: TrackerLink[];
-  defaultOpen?: boolean;
 }) {
   return (
     <div className="mt-12 lg:mt-16">
-      {/* Mobile: collapsed by default via <details>. Desktop (lg+): always open via lg:open and lg-only summary hiding. */}
-      <details className="group lg:open" open={defaultOpen}>
-        <summary className="flex cursor-pointer items-end justify-between gap-6 border-b border-line pb-4 lg:cursor-default lg:list-none [&::-webkit-details-marker]:hidden">
+      {/* Mobile: <details> is collapsible (no open by default). Desktop: same <details> but <summary> hidden via .lg-summary-hidden, content always visible because content lives outside summary. */}
+      <details className="group lg-details-always-open">
+        <summary className="lg-summary-hidden flex cursor-pointer items-end justify-between gap-6 border-b border-line pb-4 [&::-webkit-details-marker]:hidden">
           <h3 className="text-h3 font-semibold text-navy">{title}</h3>
           <div className="flex items-center gap-3">
             <p className="text-small text-ink-muted">{items.length} live trackers</p>
             <span
               aria-hidden="true"
-              className="text-h3 font-light text-navy-500 transition-transform duration-apple group-open:rotate-45 lg:hidden"
+              className="text-h3 font-light text-navy-500 transition-transform duration-apple group-open:rotate-45"
             >
               +
             </span>
           </div>
         </summary>
+        {/* Desktop-always-visible header (replaces hidden summary on lg+) */}
+        <div className="lg-only-header hidden lg:flex lg:items-end lg:justify-between lg:gap-6 lg:border-b lg:border-line lg:pb-4">
+          <h3 className="text-h3 font-semibold text-navy">{title}</h3>
+          <p className="text-small text-ink-muted">{items.length} live trackers</p>
+        </div>
         <ul className="mt-6 grid grid-cols-1 gap-3 md:grid-cols-2">
           {items.map((item) => (
             <LinkRow key={item.href} item={item} />
@@ -103,7 +107,7 @@ export function Proof() {
     >
       <Container as="div" className="section-pad">
         {/* Header */}
-        <div className="max-w-prose-wide">
+        <Reveal className="max-w-prose-wide">
           <p className="text-small font-medium uppercase tracking-[0.14em] text-ink-muted">
             Live Proof
           </p>
@@ -113,7 +117,7 @@ export function Proof() {
           <p className="mt-6 text-lead text-ink-muted">
             Every tracker below is a live document from an active or completed engagement. Click any of them to see the work, the volume, and the outcomes.
           </p>
-        </div>
+        </Reveal>
 
         {/* Master docs — always visible */}
         <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:mt-16">

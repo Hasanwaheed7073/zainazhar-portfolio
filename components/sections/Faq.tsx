@@ -1,4 +1,5 @@
 import { Container } from '@/components/shared/Container';
+import { Reveal } from '@/components/shared/Reveal';
 
 export const FAQ_ITEMS = [
   {
@@ -36,7 +37,7 @@ export function Faq() {
     >
       <Container as="div" className="section-pad">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
-          <div className="lg:col-span-4">
+          <Reveal className="lg:col-span-4">
             <p className="text-small font-medium uppercase tracking-[0.14em] text-ink-muted">
               Common Questions
             </p>
@@ -46,7 +47,7 @@ export function Faq() {
             <p className="mt-6 text-body text-ink-muted">
               If something is not covered here, ask on the discovery call. Direct answers, no sales theatre.
             </p>
-          </div>
+          </Reveal>
 
           <div className="lg:col-span-8">
             <ul className="divide-y divide-line rounded-card border border-line bg-surface">

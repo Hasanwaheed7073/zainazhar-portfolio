@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Container } from '@/components/shared/Container';
+import { Reveal } from '@/components/shared/Reveal';
 import { ContactForm } from './ContactForm';
 
 const CALENDAR_URL = 'https://calendar.app.google/MQvjkqsFfvneTyi48';
@@ -16,7 +17,7 @@ export function Contact() {
       className="bg-surface"
     >
       <Container as="div" className="section-pad">
-        <div className="max-w-prose-wide">
+        <Reveal className="max-w-prose-wide">
           <p className="text-small font-medium uppercase tracking-[0.14em] text-ink-muted">
             Get in Touch
           </p>
@@ -26,7 +27,7 @@ export function Contact() {
           <p className="mt-6 text-lead text-ink-muted">
             Four ways to start the conversation. The 30-minute partner call is the fastest path to clarity.
           </p>
-        </div>
+        </Reveal>
 
         <div className="mt-16 grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
           {/* Left: direct channels */}
@@ -36,7 +37,7 @@ export function Contact() {
               href={CALENDAR_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="group block rounded-card border border-navy bg-navy p-8 text-surface transition-opacity duration-apple hover:opacity-90"
+              className="group block hover-lift rounded-card border border-navy bg-navy p-8 text-surface transition-opacity duration-apple hover:opacity-90"
             >
               <p className="text-small font-medium uppercase tracking-[0.14em] text-navy-300">
                 Recommended
@@ -58,7 +59,7 @@ export function Contact() {
                   href={WHATSAPP_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-between gap-4 rounded-card border border-line bg-surface p-6 transition-opacity duration-apple hover:opacity-80"
+                  className="hover-lift flex items-center justify-between gap-4 rounded-card border border-line bg-surface p-6 transition-opacity duration-apple hover:opacity-80"
                 >
                   <div>
                     <p className="text-small font-medium uppercase tracking-[0.14em] text-ink-muted">
@@ -74,7 +75,7 @@ export function Contact() {
               <li>
                 <a
                   href={`mailto:${EMAIL}`}
-                  className="flex items-center justify-between gap-4 rounded-card border border-line bg-surface p-6 transition-opacity duration-apple hover:opacity-80"
+                  className="hover-lift flex items-center justify-between gap-4 rounded-card border border-line bg-surface p-6 transition-opacity duration-apple hover:opacity-80"
                 >
                   <div>
                     <p className="text-small font-medium uppercase tracking-[0.14em] text-ink-muted">
@@ -92,7 +93,7 @@ export function Contact() {
                   href={LINKEDIN_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-between gap-4 rounded-card border border-line bg-surface p-6 transition-opacity duration-apple hover:opacity-80"
+                  className="hover-lift flex items-center justify-between gap-4 rounded-card border border-line bg-surface p-6 transition-opacity duration-apple hover:opacity-80"
                 >
                   <div>
                     <p className="text-small font-medium uppercase tracking-[0.14em] text-ink-muted">

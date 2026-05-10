@@ -1,4 +1,5 @@
 import { Container } from '@/components/shared/Container';
+import { Reveal } from '@/components/shared/Reveal';
 
 const PILLARS = [
   {
@@ -36,7 +37,7 @@ export function Pillars() {
       className="border-t border-line bg-surface-alt"
     >
       <Container as="div" className="section-pad">
-        <div className="max-w-prose-wide">
+        <Reveal className="max-w-prose-wide">
           <p className="text-small font-medium uppercase tracking-[0.14em] text-ink-muted">
             What I Execute
           </p>
@@ -46,7 +47,7 @@ export function Pillars() {
           <p className="mt-6 text-lead text-ink-muted">
             Your clients stay focused on positioning, prep, and decisions. I run the daily execution that fills the pipeline.
           </p>
-        </div>
+        </Reveal>
 
         <ol className="mt-16 grid grid-cols-1 gap-px overflow-hidden rounded-card border border-line bg-line md:grid-cols-2 lg:grid-cols-3">
           {PILLARS.map((p) => (

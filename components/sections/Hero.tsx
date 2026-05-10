@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { Container } from '@/components/shared/Container';
+import { Reveal } from '@/components/shared/Reveal';
 
 export function Hero() {
   return (
@@ -11,7 +12,7 @@ export function Hero() {
       <Container as="div" className="section-pad">
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-16">
           {/* Left: copy */}
-          <div className="lg:col-span-7">
+          <Reveal className="lg:col-span-7">
             <p className="text-small font-medium uppercase tracking-[0.14em] text-ink-muted">
               Reverse Recruiting Partner
             </p>
@@ -35,7 +36,7 @@ export function Hero() {
             <p className="mt-8 text-small text-ink-soft">
               Trusted across the United States, United Kingdom, and Canada.
             </p>
-          </div>
+          </Reveal>
 
           {/* Right: headshot */}
           <div className="lg:col-span-5">

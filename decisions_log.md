@@ -373,3 +373,13 @@
 - Footer: py-16 reduced to py-12 on mobile (md:py-16 retained). Grid gap reduced from gap-10 to gap-8 on mobile.
 - LOCKED: Mobile-first density philosophy. Future sections must respect mobile breathing room before desktop polish.
 - LOCKED: Native <details>/<summary> pattern for any progressive-disclosure UI. NO JS-based collapses.
+
+## 2026-05-10 — P19 DESKTOP_FIX_AND_MOTION locked
+- Desktop Proof Fix: Replaced broken lg:open pattern with CSS override. lg-summary-hidden hides the <summary> toggle on desktop, and details.lg-details-always-open > * forces content display. Native details behavior remains untouched on mobile.
+- Motion Foundation: Added Reveal.tsx and CountUp.tsx client components using IntersectionObserver and requestAnimationFrame.
+- Motion Rules: Apple-imperceptible. Reveal uses 480ms ease-out (cubic-bezier 0.22, 0.61, 0.36, 1) with 8px upward translation. CountUp uses 900ms ease-out. No staggers, no parallax.
+- Sections wrapped in Reveal: Hero, Bottleneck, Pillars, Proof, Process, About, Faq, Contact (Eyebrow + H2 + Lead blocks).
+- TrustBar numbers wrapped in CountUp.
+- Contact section CTA cards given .hover-lift pure CSS transition.
+- Accessibility: Motion components and .hover-lift explicitly check and respect prefers-reduced-motion, instantly resolving to end state without animation.
+- LOCKED: No external animation libraries (e.g. framer-motion) allowed. All future motion must reuse Reveal, CountUp, or pure CSS.

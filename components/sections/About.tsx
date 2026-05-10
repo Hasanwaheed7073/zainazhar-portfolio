@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { Container } from '@/components/shared/Container';
+import { Reveal } from '@/components/shared/Reveal';
 
 const INLINE_FACTS = [
   'Albany, New York',
@@ -33,7 +34,7 @@ export function About() {
           </div>
 
           {/* Right: story */}
-          <div className="lg:col-span-7">
+          <Reveal className="lg:col-span-7">
             <p className="text-small font-medium uppercase tracking-[0.14em] text-ink-muted">
               About Zain
             </p>
@@ -64,7 +65,7 @@ export function About() {
                 I do not coach. I do not sell mindset. I show up every working day and execute, so the coaches I partner with can keep doing what they do best, while their clients land interviews and offers in the background.
               </p>
             </div>
-          </div>
+          </Reveal>
         </div>
       </Container>
     </section>

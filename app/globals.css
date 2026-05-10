@@ -201,7 +201,65 @@
       animation-duration: 0.01ms !important;
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
-      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* === P19 — Apple-imperceptible motion + Proof desktop fix === */
+@layer base {
+  /* Force <details> to always render its content on desktop. Native browser behavior on lg+: hide the summary, expose content unconditionally via display override on the details panel. */
+  @media (min-width: 1024px) {
+    .lg-summary-hidden {
+      display: none !important;
+    }
+    /* When summary is hidden on desktop, force the details container to always show its children regardless of the open attribute. */
+    details.lg-details-always-open > ul,
+    details.lg-details-always-open > div.lg-only-header {
+      display: revert !important;
+    }
+  }
+
+  /* Reveal animation — opacity + 8px translate up. 480ms ease-out. Runs once. */
+  @keyframes reveal-up {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .reveal-init {
+    opacity: 0;
+    transform: translateY(8px);
+    will-change: opacity, transform;
+  }
+
+  .reveal-in {
+    animation: reveal-up 480ms cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+  }
+
+  /* Reduced motion: skip animation entirely, just show content. */
+  @media (prefers-reduced-motion: reduce) {
+    .reveal-init {
+      opacity: 1;
+      transform: none;
+    }
+    .reveal-in {
+      animation: none;
+    }
+  }
+
+  /* Subtle hover lift for CTA cards */
+  @media (prefers-reduced-motion: no-preference) {
+    .hover-lift {
+      transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 300ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .hover-lift:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 20px -10px rgba(10, 31, 68, 0.1);
     }
   }
 }

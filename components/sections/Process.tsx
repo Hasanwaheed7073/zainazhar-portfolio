@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Container } from '@/components/shared/Container';
+import { Reveal } from '@/components/shared/Reveal';
 
 const STEPS = [
   {
@@ -36,7 +37,7 @@ export function Process() {
       className="border-t border-line bg-surface-alt"
     >
       <Container as="div" className="section-pad">
-        <div className="max-w-prose-wide">
+        <Reveal className="max-w-prose-wide">
           <p className="text-small font-medium uppercase tracking-[0.14em] text-ink-muted">
             How the Partnership Works
           </p>
@@ -46,7 +47,7 @@ export function Process() {
           <p className="mt-6 text-lead text-ink-muted">
             The partnership is intentionally simple. Discovery, integration, daily execution, weekly reporting. Repeat.
           </p>
-        </div>
+        </Reveal>
 
         <ol className="mt-16 grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-x-16">
           {STEPS.map((step) => (

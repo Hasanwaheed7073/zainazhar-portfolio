@@ -108,3 +108,10 @@
 - Native <details> CategoryBlock pattern: zero JavaScript, fully accessible, respects prefers-reduced-motion (no animation on disclosure). Apple-style + sign rotates 45deg on group-open, hidden on lg.
 - Inline pipe-separated facts on About uses flex flex-wrap so it wraps cleanly on narrow viewports without horizontal overflow.
 - Desktop layouts visually identical to pre-P18 production (verified by class targeting: all changes scoped to mobile via Tailwind responsive prefixes).
+
+## 2026-05-10 — P19 Desktop Fix and Apple-imperceptible motion
+- Desktop Proof fix: Replaced brittle open attribute logic with pure CSS structure. Desktop now hides the summary and forces the children open using lg-details-always-open. Mobile behavior remains native accordion.
+- Reveal animation: 480ms ease-out (cubic-bezier 0.22, 0.61, 0.36, 1) moving elements up 8px while fading opacity from 0 to 1. Threshold 0.15. Applied to all section headers.
+- CountUp animation: 900ms ease-out on TrustBar statistics. Triggers once on scroll.
+- Card hover lift: .hover-lift class added for subtle 4px upward translation and soft box shadow on hover. Applied exclusively to CTA cards in Contact section.
+- Reduced-motion support is strictly respected.
