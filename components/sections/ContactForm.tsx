@@ -24,9 +24,11 @@ export function ContactForm() {
     setErrorMsg('');
 
     const formData = new FormData(e.currentTarget);
-    formData.append('access_key', WEB3FORMS_ACCESS_KEY);
-    formData.append('subject', 'New Partner Inquiry from zainazhar.vercel.app');
-    formData.append('from_name', 'zainazhar.vercel.app');
+    const object = Object.fromEntries(formData);
+    object.access_key = WEB3FORMS_ACCESS_KEY;
+    object.subject = 'New Partner Inquiry from zainazhar.vercel.app';
+    object.from_name = 'zainazhar.vercel.app';
+    const json = JSON.stringify(object);
 
     const apiPart1 = 'https://api.web3';
     const apiPart2 = 'forms.com/submit';
@@ -35,9 +37,10 @@ export function ContactForm() {
       const res = await fetch(apiPart1 + apiPart2, {
         method: 'POST',
         headers: {
+          'Content-Type': 'application/json',
           'Accept': 'application/json'
         },
-        body: formData,
+        body: json,
       });
       const data = await res.json();
       if (data.success) {
