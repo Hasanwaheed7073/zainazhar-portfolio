@@ -20,21 +20,24 @@ export function ContactForm() {
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
+    // Capture the form reference before any async work.
+    // After an `await`, React's synthetic event is recycled and
+    // e.currentTarget becomes null — calling .reset() on null throws,
+    // which the catch block was misreporting as a "Network error".
+    const form = e.currentTarget;
+
     setStatus('submitting');
     setErrorMsg('');
 
-    const formData = new FormData(e.currentTarget);
+    const formData = new FormData(form);
     const object = Object.fromEntries(formData);
     object.access_key = WEB3FORMS_ACCESS_KEY;
     object.subject = 'New Partner Inquiry from zainazhar.vercel.app';
     object.from_name = 'zainazhar.vercel.app';
     const json = JSON.stringify(object);
 
-    const apiPart1 = 'https://api.web3';
-    const apiPart2 = 'forms.com/submit';
-
     try {
-      const res = await fetch(apiPart1 + apiPart2, {
+      const res = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -45,7 +48,7 @@ export function ContactForm() {
       const data = await res.json();
       if (data.success) {
         setStatus('success');
-        e.currentTarget.reset();
+        form.reset();
       } else {
         setStatus('error');
         setErrorMsg(data.message || 'Something went wrong. Please use WhatsApp or email.');
