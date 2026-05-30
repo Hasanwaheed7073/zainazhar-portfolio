@@ -6,14 +6,14 @@ import { TrustBar } from '@/components/sections/TrustBar';
 import { Proof } from '@/components/sections/Proof';
 
 export const metadata: Metadata = {
-  title: 'Reverse Recruiter for Job Seekers',
-  description: 'A managed job search service for mid-level to executive professionals. Daily applications, recruiter outreach, follow-ups, and live reporting across the United States, United Kingdom, and Canada.',
+  title: 'Reverse Recruiter for US Job Seekers',
+  description: 'A done-for-you job search run by a reverse recruiter. Daily applications, recruiter outreach, follow-ups, and live reporting for US professionals.',
   alternates: {
     canonical: 'https://zainazhar.vercel.app/job-seekers',
   },
   openGraph: {
-    title: 'Reverse Recruiter for Job Seekers — Zain Azhar',
-    description: 'A managed job search service that runs your applications, outreach, and follow-ups every working day.',
+    title: 'Reverse Recruiter for US Job Seekers',
+    description: 'A done-for-you job search run by a reverse recruiter. Daily applications, recruiter outreach, and follow-ups for US professionals.',
     url: 'https://zainazhar.vercel.app/job-seekers',
     type: 'website',
   },

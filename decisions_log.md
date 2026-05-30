@@ -394,3 +394,18 @@
 - Memory files updated to reflect actual shipped state of P19.
 - Both commits (P19 + P19.1) pushed to origin/main triggering Vercel auto-deploy.
 - Architecture invariant restored: decisions_log.md now accurately describes the codebase.
+
+## 2026-05-30 — SEO strategy: lead acquisition with B2C (job seekers)
+- Decision: SEO and content lead with job-seeker demand terms; career coaches stay a conversion and outbound play.
+- /job-seekers becomes the primary SEO hub. Homepage hero remains LOCKED pending separate decision.
+- agents.md conversion split (coaches 80 / seekers 20) is unchanged; this affects acquisition channel only.
+
+## 2026-05-30 — Path B confirmed; blog is the B2C acquisition engine
+- Homepage hero stays LOCKED and coach-focused. No /for-career-coaches page (would duplicate the homepage).
+- All B2C SEO compounds on /job-seekers plus a light /blog. Blog posts are data objects in lib/content.ts, rendered by one dynamic route. No new dependencies.
+- Next planned posts (one surgical prompt each): reverse recruiter cost, is reverse recruiting worth it, should I pay a recruiter to find me a job.
+
+## 2026-05-30 — Niche pages are the conversion play under Path B
+- Structure: hub /reverse-recruiter plus dynamic /reverse-recruiter/[niche], data-driven from NICHES in lib/content.ts. Mirrors the blog pattern.
+- Each niche must carry differentiated content (roles plus real proof) to stay clear of thin-content risk. Healthcare shipped first (deepest proof).
+- Next niches (one object append each): tech sales (AE/CSM), product management, executive search.

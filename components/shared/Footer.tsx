@@ -31,6 +31,8 @@ export function Footer() {
               <li><Link href="/#proof" className="hover:text-navy transition-opacity duration-apple">Live Proof</Link></li>
               <li><Link href="/#process" className="hover:text-navy transition-opacity duration-apple">Process</Link></li>
               <li><Link href="/job-seekers" className="hover:text-navy transition-opacity duration-apple">For Job Seekers</Link></li>
+              <li><Link href="/blog" className="hover:text-navy transition-opacity duration-apple">Blog</Link></li>
+              <li><Link href="/reverse-recruiter" className="hover:text-navy transition-opacity duration-apple">Reverse Recruiter by Field</Link></li>
               <li><Link href="/#contact" className="hover:text-navy transition-opacity duration-apple">Contact</Link></li>
             </ul>
           </div>

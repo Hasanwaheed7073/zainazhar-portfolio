@@ -16,7 +16,7 @@ export function JobSeekerHero() {
             id="js-hero-heading"
             className="mt-5 text-display font-semibold text-navy"
           >
-            Stop applying. Start getting interviews.
+            A reverse recruiter who runs your job search
           </h1>
           <p className="mt-6 text-lead text-ink-muted">
             If you are sending dozens of applications a week and getting silence in return, the problem is rarely your experience. It is the system. I run that system for you, end to end, while you focus on prep and decisions.

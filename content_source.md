@@ -83,3 +83,33 @@ Reverse Recruiter and Job Search Operator. 5+ years executing job search campaig
 - How is progress reported?
 - What does pricing look like?
 - How is client confidentiality maintained?
+
+## Job Seekers Page (US-first) — APPROVED COPY
+- Eyebrow: For Job Seekers
+- H1: A reverse recruiter who runs your job search
+- Trust line (unchanged): Working with mid-level to executive professionals across the United States, United Kingdom, and Canada.
+
+## Blog Post — what-is-reverse-recruiting (US-first) — APPROVED COPY
+- H1: What is reverse recruiting?
+- Dek: The job search has turned into a second job. Reverse recruiting is the answer a growing number of professionals are reaching for. Here is what it actually means.
+- Body and FAQ: see POSTS array in lib/content.ts (single runtime source). All copy approved, no invented statistics, numbers limited to verified 5+ years, 300+ clients, 400+ interviews, US/UK/CA.
+- Internal CTA: links to /job-seekers.
+
+## Blog Post — how-much-does-a-reverse-recruiter-cost (US-first) — APPROVED COPY
+- H1: How much does a reverse recruiter cost?
+- No specific Zain pricing is stated. Market pricing models and approximate 2026 ranges only. Pricing remains confidential and is handled on a call.
+- Body and FAQ: see POSTS array in lib/content.ts. Internal CTA links to /job-seekers.
+
+## Blog Post — is-reverse-recruiting-worth-it (US-first) — APPROVED COPY
+- H1: Is reverse recruiting worth it?
+- Balanced piece: states when it is and is not worth it. No invented stats, no guarantees. Internal CTA links to /job-seekers.
+- Body and FAQ: see POSTS array in lib/content.ts.
+
+## Niche Pages — /reverse-recruiter/[niche] — APPROVED COPY
+- Hub index at /reverse-recruiter. First niche: healthcare (slug: healthcare).
+- H1: Reverse recruiter for healthcare and clinical research. Roles and proof from existing approved trackers in this file. No invented stats.
+- All niche data lives in the NICHES array in lib/content.ts. Internal CTA links to /job-seekers.
+
+## Niche Pages — tech-sales and product-management — APPROVED COPY
+- Two new niches appended to NICHES in lib/content.ts. Roles and proof from existing approved trackers. No invented stats.
+- tech-sales H1: Reverse recruiter for tech sales. product-management H1: Reverse recruiter for product managers. Both CTA to /job-seekers.

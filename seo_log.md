@@ -78,3 +78,32 @@
 - Canonical URLs set on both routes (homepage and /job-seekers each have their own).
 - themeColor #0A1F44 applied to mobile browser chrome (Apple Safari, Android Chrome).
 - Total SEO infrastructure now: 4 JSON-LD schemas + sitemap.xml + robots.txt + 2 sets of OG/Twitter images + complete metadata + canonical URLs.
+
+## 2026-05-30 — /job-seekers retargeted to demand head terms (US-first)
+- New primary targets: reverse recruiter, done-for-you job search, job application service (US).
+- H1 now carries 'reverse recruiter'. Title and meta lead with head term plus US geo.
+- Homepage coach keywords untouched. B2C acquisition added without reversing the coach conversion goal.
+
+## 2026-05-30 — Blog launched, B2C top-of-funnel (Path B)
+- New routes: /blog (index) and /blog/[slug] (static). First post targets 'what is reverse recruiting'.
+- Each post ships Article + BreadcrumbList + FAQPage JSON-LD. FAQ eligible for SERP rich snippets.
+- Internal link from every post to /job-seekers concentrates authority on the primary B2C money page.
+- Blog and post URLs added to sitemap.xml. Footer now links to /blog for crawlability.
+
+## 2026-05-30 — Blog post 2: reverse recruiter cost (commercial intent)
+- Targets reverse recruiter cost and reverse recruiting pricing. High commercial intent, low competition.
+- States market pricing models only, no Zain prices. Article + BreadcrumbList + FAQPage JSON-LD inherited from the post template.
+
+## 2026-05-30 — Blog post 3: is reverse recruiting worth it (decision-stage)
+- Targets is reverse recruiting worth it. Bottom-of-funnel commercial investigation, close to purchase.
+- Two-sided framing builds trust with skeptical buyers. Article + BreadcrumbList + FAQPage JSON-LD inherited from post template.
+
+## 2026-05-30 — Niche landing pages launched (healthcare first)
+- New routes: /reverse-recruiter (hub) and /reverse-recruiter/[niche] (static). First page targets reverse recruiter healthcare, nurses, clinical research.
+- Differentiated content per niche (role list plus live proof trackers) avoids thin or doorway pages.
+- Service plus BreadcrumbList plus FAQPage JSON-LD per niche. Hub and niche URLs added to sitemap. Footer links to the hub.
+- Internal links: niche pages CTA to /job-seekers; hub linked sitewide via footer.
+
+## 2026-05-30 — Niche pages 2 and 3: tech sales and product management
+- New static routes via NICHES: /reverse-recruiter/tech-sales and /reverse-recruiter/product-management.
+- Each carries a distinct role list and live proof, keeping clear of thin-content risk. Service + BreadcrumbList + FAQPage JSON-LD per page. Hub now lists three fields.
