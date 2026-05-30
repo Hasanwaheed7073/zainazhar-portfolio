@@ -63,6 +63,10 @@ export const metadata: Metadata = {
     description: 'Job search execution partner for career coaches. 300+ clients, 400+ interviews.',
     creator: '@zainazhar',
   },
+  icons: {
+    icon: '/meta-logo.png',
+    apple: '/meta-logo.png',
+  },
   category: 'Career Services',
   formatDetection: {
     email: false,
