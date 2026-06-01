@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://zainazhar.vercel.app/sitemap.xml
