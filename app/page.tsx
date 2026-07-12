@@ -10,6 +10,21 @@ import { About } from '@/components/sections/About';
 import { Faq, FAQ_ITEMS } from '@/components/sections/Faq';
 import { Contact } from '@/components/sections/Contact';
 
+const AREA_SERVED = [
+  { '@type': 'Country', name: 'United States', sameAs: 'https://en.wikipedia.org/wiki/United_States' },
+  { '@type': 'Country', name: 'United Kingdom', sameAs: 'https://en.wikipedia.org/wiki/United_Kingdom' },
+  { '@type': 'Country', name: 'Canada', sameAs: 'https://en.wikipedia.org/wiki/Canada' },
+];
+
+const BUSINESS_ADDRESS = {
+  '@type': 'PostalAddress',
+  streetAddress: 'Albany',
+  addressLocality: 'Albany',
+  addressRegion: 'NY',
+  postalCode: '12207',
+  addressCountry: 'US',
+};
+
 const PERSON_JSONLD = {
   '@context': 'https://schema.org',
   '@type': 'Person',
@@ -20,16 +35,12 @@ const PERSON_JSONLD = {
   url: 'https://zainazhar.vercel.app',
   image: 'https://zainazhar.vercel.app/zain-headshot.jpg',
   email: 'mailto:zeecareers07@gmail.com',
+  telephone: '+923087823424',
   sameAs: [
     'https://www.linkedin.com/in/zain-a-385a0b236/',
   ],
-  address: {
-    '@type': 'PostalAddress',
-    addressLocality: 'Albany',
-    addressRegion: 'NY',
-    addressCountry: 'US',
-  },
-  areaServed: ['United States', 'United Kingdom', 'Canada'],
+  address: BUSINESS_ADDRESS,
+  areaServed: AREA_SERVED,
   knowsAbout: [
     'Reverse Recruiting',
     'Job Search Execution',
@@ -60,11 +71,19 @@ const SERVICE_JSONLD = {
   description: 'White-label reverse recruiting and job search execution for career coaches. 300+ clients, 400+ interviews across the United States, United Kingdom, and Canada.',
   url: 'https://zainazhar.vercel.app',
   image: 'https://zainazhar.vercel.app/zain-headshot.jpg',
+  telephone: '+923087823424',
+  email: 'zeecareers07@gmail.com',
+  address: BUSINESS_ADDRESS,
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: 42.6526,
+    longitude: -73.7562,
+  },
   provider: {
     '@type': 'Person',
     name: 'Zain Azhar',
   },
-  areaServed: ['United States', 'United Kingdom', 'Canada'],
+  areaServed: AREA_SERVED,
   serviceType: 'Reverse Recruiting for Career Coaches',
 };
 
