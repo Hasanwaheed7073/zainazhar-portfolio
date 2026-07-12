@@ -221,4 +221,93 @@ export const NICHES: Niche[] = [
       { q: 'How do you handle title variation across companies?', a: 'I target by scope and seniority, not just title, so the search covers the roles that actually fit.' },
     ],
   },
+  {
+    slug: 'marketing-growth',
+    title: 'Reverse Recruiter for Marketing & Growth Jobs',
+    description:
+      'A done-for-you job search for marketing and growth professionals. Targeted applications, recruiter outreach, and live proof for content, lifecycle, and growth roles.',
+    h1: 'Reverse recruiter for marketing and growth',
+    dek: 'Marketing and growth roles reward positioning and speed. I run a targeted search so your applications reach the right teams before the role closes.',
+    keywords: ['reverse recruiter marketing', 'reverse recruiter for growth roles', 'marketing job search service', 'content marketing job search', 'lifecycle marketing reverse recruiter'],
+    intro: [
+      'Marketing and growth hiring is competitive and title-fragmented. The same scope shows up as Content Marketing Manager at one company and Growth Lead at another. A search that works needs someone who understands the landscape and targets by scope, not just keywords.',
+      'I run that search for you. I find roles that match your experience and impact level, write applications that show marketing results, reach out to recruiters and hiring managers, follow up on a schedule, and track every step so you can see progress.',
+    ],
+    roles: [
+      'Content Marketing Manager and Senior Content Manager',
+      'Growth Marketing Manager',
+      'Product Marketing Manager',
+      'Lifecycle and Retention Marketing',
+      'Production Media and Content Operations',
+      'SDR and BDR Marketing (demand generation)',
+    ],
+    proof: [
+      { label: 'Content Manager / Production Media campaign', href: 'https://docs.google.com/spreadsheets/d/118XeUIw-1JhJf9SWFBHHj58-zcQ6Z6Xe/edit' },
+      { label: 'Product / Growth / Lifecycle Marketing campaign', href: 'https://docs.google.com/spreadsheets/d/1K7LfyJ4N-sF9YrWhN3sFukG1GcNCD8cf/edit' },
+      { label: 'Product / Growth / Lifecycle Marketing campaign (2)', href: 'https://docs.google.com/spreadsheets/d/1T-TVzQm5zm6irdeAI7u7Sqpv4_3qJRlS/edit' },
+      { label: 'Content / Growth / SDR / BDR Marketing campaign', href: 'https://docs.google.com/spreadsheets/d/1oEakdwg5qLQZtel-AhV6nwNlnlLRLqYk/edit' },
+    ],
+    faq: [
+      { q: 'Do you understand marketing and growth roles?', a: 'Yes. I have run campaigns across content marketing, growth, lifecycle, and demand generation. The live trackers above show real searches.' },
+      { q: 'How do you handle the title fragmentation in marketing?', a: 'I target by scope and impact, not just title. A Growth Lead and a Lifecycle Marketing Manager can be the same role at different companies. I cover both.' },
+      { q: 'Can you target both B2B and B2C marketing roles?', a: 'Yes. The outreach and applications are tailored to the company context. I adjust positioning based on whether the role is B2B SaaS, DTC, or agency-side.' },
+    ],
+  },
+  {
+    slug: 'executive',
+    title: 'Reverse Recruiter for VP & Executive Roles',
+    description:
+      'A done-for-you job search for VP, director, and executive professionals. Targeted applications, discreet recruiter outreach, and live proof from real executive campaigns.',
+    h1: 'Reverse recruiter for VP and executive roles',
+    dek: 'Executive searches need discretion, precision, and senior-level positioning. I run a quiet, targeted search so you reach decision-makers without a public scramble.',
+    keywords: ['reverse recruiter executive', 'reverse recruiter VP', 'executive job search service', 'VP job search', 'director job search reverse recruiter'],
+    intro: [
+      'Executive and VP roles do not get filled through job boards alone. The best moves happen through targeted outreach, warm introductions, and precise positioning. A public search at this level can do more harm than good.',
+      'I run that search for you with discretion. I identify the right opportunities, craft executive-level outreach, connect with decision-makers and executive recruiters, and manage the pipeline so you stay focused on conversations that matter.',
+    ],
+    roles: [
+      'Vice President of Analytics (Data, Business, AI)',
+      'VP of Engineering and VP of Product',
+      'Senior Director and Director-level roles',
+      'Chief of Staff and senior operations leadership',
+      'C-suite advisory and fractional executive search',
+    ],
+    proof: [
+      { label: 'VP Analytics (Data / Business / AI) campaign', href: 'https://docs.google.com/spreadsheets/d/1V6Q1XOPJRVmo_ki2l9NSQ-ffrc_teT5_/edit' },
+      { label: 'VP Analytics campaign (2)', href: 'https://docs.google.com/spreadsheets/d/1HAd6pIWebzSpu3dXHXlbQxxKbmmBMGcP/edit' },
+    ],
+    faq: [
+      { q: 'Is the search discreet?', a: 'Yes. Executive searches are handled with full discretion. No public postings, no mass outreach. Every message is targeted and confidential.' },
+      { q: 'Do you work with executive recruiters?', a: 'Yes. Part of the outreach is direct engagement with retained and contingency executive recruiters who cover your target level and industry.' },
+      { q: 'What seniority levels do you cover?', a: 'Director, Senior Director, VP, SVP, and C-level. The live trackers above show real campaigns at the VP level.' },
+    ],
+  },
+  {
+    slug: 'software-engineering',
+    title: 'Reverse Recruiter for Software Engineers',
+    description:
+      'A done-for-you job search for software engineers. Targeted applications, recruiter outreach, and live proof for backend, fullstack, and engineering roles across the US.',
+    h1: 'Reverse recruiter for software engineers',
+    dek: 'Engineering roles are competitive and recruiter-heavy. I run a targeted search that gets your profile in front of the right engineering managers and technical recruiters.',
+    keywords: ['reverse recruiter software engineer', 'reverse recruiter for engineers', 'software engineer job search service', 'backend engineer job search', 'fullstack engineer reverse recruiter'],
+    intro: [
+      'Software engineering hiring is noisy. Hundreds of applicants per role, recruiter spam that misses your stack, and job descriptions that blur seniority levels. A search that works cuts through the noise with targeted applications and direct outreach to engineering managers.',
+      'I run that search for you. I find roles that match your stack and seniority, write applications that highlight engineering impact, reach out to technical recruiters and hiring managers, follow up on a schedule, and track every step.',
+    ],
+    roles: [
+      'Software Engineer and Senior Software Engineer',
+      'Backend Engineer and Senior Backend Engineer',
+      'Fullstack Engineer and Senior Fullstack Engineer',
+      'Staff Engineer and Principal Engineer',
+      'Engineering Manager (IC-to-management transitions)',
+    ],
+    proof: [
+      { label: 'Software / Backend / Fullstack Engineer campaign', href: 'https://docs.google.com/spreadsheets/d/1DO2akEPmQDb_RxZJQYRyr5Js0B8M8usI/edit' },
+    ],
+    faq: [
+      { q: 'Do you understand engineering roles and tech stacks?', a: 'Yes. I have run campaigns for backend, fullstack, and software engineering roles. The live tracker above shows a real search.' },
+      { q: 'Can you tailor applications to specific tech stacks?', a: 'Yes. Applications are written to match the stack and tools listed in each job description. No generic resumes.' },
+      { q: 'Do you reach out to technical recruiters?', a: 'Yes. Direct outreach to technical recruiters and engineering hiring managers is part of the daily execution, not an afterthought.' },
+    ],
+  },
 ];
