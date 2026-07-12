@@ -30,7 +30,10 @@ export function JobSeekerHero() {
             </Link>
           </div>
           <p className="mt-8 text-small text-ink-soft">
-            Working with mid-level to executive professionals across the United States, United Kingdom, and Canada.
+            This page is for individual job seekers. Are you a career coach?{' '}
+            <Link href="/" className="text-navy underline-offset-4 hover:underline">
+              See the partnership page →
+            </Link>
           </p>
         </div>
       </Container>

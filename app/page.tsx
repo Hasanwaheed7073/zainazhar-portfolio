@@ -1,4 +1,5 @@
 import { Hero } from '@/components/sections/Hero';
+import { AudienceSelector } from '@/components/sections/AudienceSelector';
 import { TrustBar } from '@/components/sections/TrustBar';
 import { Bottleneck } from '@/components/sections/Bottleneck';
 import { Pillars } from '@/components/sections/Pillars';
@@ -82,6 +83,7 @@ export default function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(FAQ_JSONLD) }}
       />
       <Hero />
+      <AudienceSelector />
       <TrustBar />
       <Bottleneck />
       <Pillars />

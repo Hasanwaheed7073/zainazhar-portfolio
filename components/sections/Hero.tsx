@@ -34,7 +34,10 @@ export function Hero() {
               </Link>
             </div>
             <p className="mt-8 text-small text-ink-soft">
-              Trusted across the United States, United Kingdom, and Canada.
+              This page is for career coaches. Looking for a done-for-you job search instead?{' '}
+              <Link href="/job-seekers" className="text-navy underline-offset-4 hover:underline">
+                Go to the job seeker page →
+              </Link>
             </p>
           </Reveal>
 

@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useState, useRef, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import { Container } from './Container';
 import { NICHES } from '@/lib/content';
 
@@ -13,6 +14,11 @@ const NAV_LINKS = [
 ] as const;
 
 export function Nav() {
+  const pathname = usePathname();
+  const isJobSeekerPage = pathname.startsWith('/job-seekers');
+  const ctaLabel = isJobSeekerPage ? 'Book a Free Audit' : 'Book a Partner Call';
+  const ctaHref = isJobSeekerPage ? '#js-contact' : '/#contact';
+
   const [specialtiesOpen, setSpecialtiesOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileSpecialtiesOpen, setMobileSpecialtiesOpen] = useState(false);
@@ -142,8 +148,8 @@ export function Nav() {
             Blog
           </Link>
 
-          <Link href="/#contact" className="btn-primary text-small">
-            Book a Partner Call
+          <Link href={ctaHref} className="btn-primary text-small">
+            {ctaLabel}
           </Link>
         </nav>
 
@@ -234,8 +240,8 @@ export function Nav() {
                 Blog
               </Link>
 
-              <Link href="/#contact" onClick={closeMobileMenu} className="btn-primary w-full">
-                Book a Partner Call
+              <Link href={ctaHref} onClick={closeMobileMenu} className="btn-primary w-full">
+                {ctaLabel}
               </Link>
             </Container>
           </div>
