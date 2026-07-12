@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { Container } from '@/components/shared/Container';
 import { Reveal } from '@/components/shared/Reveal';
 
@@ -63,9 +64,11 @@ function LinkRow({ item }: { item: TrackerLink }) {
 function CategoryBlock({
   title,
   items,
+  crossLink,
 }: {
   title: string;
   items: TrackerLink[];
+  crossLink?: { href: string; label: string };
 }) {
   return (
     <div className="mt-12 lg:mt-16">
@@ -73,6 +76,11 @@ function CategoryBlock({
       <details className="group lg:hidden">
         <summary className="flex cursor-pointer items-end justify-between gap-6 border-b border-line pb-4 [&::-webkit-details-marker]:hidden">
           <h3 className="text-h3 font-semibold text-navy">{title}</h3>
+          {crossLink && (
+            <Link href={crossLink.href} className="mt-1 inline-flex items-center gap-1 text-small font-medium text-navy-500 hover:text-navy transition-opacity duration-apple">
+              {crossLink.label} <span aria-hidden="true">→</span>
+            </Link>
+          )}
           <div className="flex items-center gap-3">
             <p className="text-small text-ink-muted">{items.length} live trackers</p>
             <span
@@ -94,6 +102,11 @@ function CategoryBlock({
       <div className="hidden lg:block">
         <div className="flex items-end justify-between gap-6 border-b border-line pb-4">
           <h3 className="text-h3 font-semibold text-navy">{title}</h3>
+          {crossLink && (
+            <Link href={crossLink.href} className="mt-1 inline-flex items-center gap-1 text-small font-medium text-navy-500 hover:text-navy transition-opacity duration-apple">
+              {crossLink.label} <span aria-hidden="true">→</span>
+            </Link>
+          )}
           <p className="text-small text-ink-muted">{items.length} live trackers</p>
         </div>
         <ul className="mt-6 grid grid-cols-1 gap-3 md:grid-cols-2">
@@ -157,10 +170,18 @@ export function Proof() {
         </div>
 
         {/* General roles — collapsed on mobile, open on desktop */}
-        <CategoryBlock title="General Role Campaigns" items={GENERAL_ROLES} />
+        <CategoryBlock
+          title="General Role Campaigns"
+          items={GENERAL_ROLES}
+          crossLink={{ href: '/reverse-recruiter', label: 'See all specialties by field' }}
+        />
 
         {/* Healthcare specialty — collapsed on mobile, open on desktop */}
-        <CategoryBlock title="Healthcare Specialty Campaigns" items={HEALTHCARE} />
+        <CategoryBlock
+          title="Healthcare Specialty Campaigns"
+          items={HEALTHCARE}
+          crossLink={{ href: '/reverse-recruiter/healthcare', label: 'Healthcare reverse recruiting page' }}
+        />
 
         {/* Closing note */}
         <p className="mt-12 max-w-prose-wide text-small text-ink-muted">
