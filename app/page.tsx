@@ -5,6 +5,7 @@ import { Bottleneck } from '@/components/sections/Bottleneck';
 import { Pillars } from '@/components/sections/Pillars';
 import { Proof } from '@/components/sections/Proof';
 import { Process } from '@/components/sections/Process';
+import { Pricing } from '@/components/sections/Pricing';
 import { About } from '@/components/sections/About';
 import { Faq, FAQ_ITEMS } from '@/components/sections/Faq';
 import { Contact } from '@/components/sections/Contact';
@@ -89,6 +90,7 @@ export default function HomePage() {
       <Pillars />
       <Proof />
       <Process />
+      <Pricing />
       <About />
       <Faq />
       <Contact />
