@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import Script from 'next/script';
 import './globals.css';
 import { Nav } from '@/components/shared/Nav';
 import { Footer } from '@/components/shared/Footer';
@@ -90,6 +91,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {children}
         <Footer />
       </body>
+      {/* Google Analytics */}
+      <Script
+        src="https://www.googletagmanager.com/gtag/js?id=G-EC6HF9FK9Z"
+        strategy="afterInteractive"
+      />
+      <Script id="google-analytics" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-EC6HF9FK9Z');
+        `}
+      </Script>
     </html>
   );
 }
