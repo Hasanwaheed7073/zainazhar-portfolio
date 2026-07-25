@@ -17,7 +17,7 @@ export function TrustBar() {
           </li>
           <li className="text-center md:text-left">
             <p className="text-h2 font-semibold tracking-tight text-navy">
-              <CountUp end={400} suffix="+" />
+              <CountUp end={3400} suffix="+" />
             </p>
             <p className="mt-1 text-small text-ink-muted">Interviews Facilitated</p>
           </li>

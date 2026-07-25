@@ -37,7 +37,7 @@ const PERSON_JSONLD = {
   email: 'mailto:zeecareers07@gmail.com',
   telephone: '+923087823424',
   sameAs: [
-    'https://www.linkedin.com/in/zain-a-385a0b236/',
+    'https://www.linkedin.com/in/zainazhar/',
   ],
   address: BUSINESS_ADDRESS,
   areaServed: AREA_SERVED,
@@ -68,7 +68,7 @@ const SERVICE_JSONLD = {
   '@context': 'https://schema.org',
   '@type': 'ProfessionalService',
   name: 'Zain Azhar — Reverse Recruiting',
-  description: 'White-label reverse recruiting and job search execution for career coaches. 300+ clients, 400+ interviews across the United States, United Kingdom, and Canada.',
+  description: 'White-label reverse recruiting and job search execution for career coaches. 300+ clients, 3,400+ interviews across the United States, United Kingdom, and Canada.',
   url: 'https://zainazhar.vercel.app',
   image: 'https://zainazhar.vercel.app/zain-headshot.jpg',
   telephone: '+923087823424',

@@ -9,6 +9,5 @@ export default function robots(): MetadataRoute.Robots {
       },
     ],
     sitemap: 'https://zainazhar.vercel.app/sitemap.xml',
-    host: 'https://zainazhar.vercel.app',
   };
 }

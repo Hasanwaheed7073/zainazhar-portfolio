@@ -5,7 +5,7 @@ const CONTACT = {
   email: 'zeecareers07@gmail.com',
   whatsapp: '+923087823424',
   whatsappLink: 'https://wa.me/923087823424',
-  linkedin: 'https://www.linkedin.com/in/zain-a-385a0b236/',
+  linkedin: 'https://www.linkedin.com/in/zainazhar/',
 } as const;
 
 export function Footer() {

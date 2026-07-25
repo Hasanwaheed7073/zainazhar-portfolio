@@ -43,7 +43,7 @@ export const POSTS: Post[] = [
       { type: 'h2', text: 'How to tell a real service from a volume mill' },
       { type: 'p', text: 'Ask three questions. Does a real person write and send the applications, or is it a bot spraying the same resume everywhere. Can they show live proof of past campaigns and interviews. Is the outreach written like a human who understands the role. Volume without targeting is noise. Targeted execution is what gets replies.' },
       { type: 'h2', text: 'Where to start' },
-      { type: 'p', text: 'If you want the daily execution handled by someone who has run it before, that is what I do. More than 5 years of work, 300 plus clients supported, and 400 plus interviews facilitated across the United States, United Kingdom, and Canada.' },
+      { type: 'p', text: 'If you want the daily execution handled by someone who has run it before, that is what I do. More than 5 years of work, 300 plus clients supported, and 3,400 plus interviews facilitated across the United States, United Kingdom, and Canada.' },
     ],
     faq: [
       { q: 'Is reverse recruiting the same as someone applying to jobs for me?', a: 'Applying is part of it. The bigger value is a managed pipeline: targeting, applications, outreach, follow-ups, and reporting run together as one process.' },

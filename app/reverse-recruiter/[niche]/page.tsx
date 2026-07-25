@@ -19,6 +19,11 @@ export async function generateMetadata({ params }: { params: Promise<{ niche: st
     keywords: data.keywords,
     alternates: { canonical: url },
     openGraph: { title: data.title, description: data.description, url, type: 'website' },
+    twitter: {
+      card: 'summary_large_image',
+      title: data.title,
+      description: data.description,
+    },
   };
 }
 

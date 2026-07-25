@@ -6,7 +6,7 @@ const INLINE_FACTS = [
   'Albany, New York',
   '5+ years executing',
   '300+ clients',
-  '400+ interviews',
+  '3,400+ interviews',
   'US, UK, Canada',
   '8,300+ LinkedIn followers',
 ] as const;

@@ -14,6 +14,11 @@ export const metadata: Metadata = {
     url: 'https://zainazhar.vercel.app/reverse-recruiter',
     type: 'website',
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Reverse Recruiter by Field — Zain Azhar',
+    description: 'A done-for-you job search by field. See roles targeted and live proof from real campaigns.',
+  },
 };
 
 export default function ReverseRecruiterIndexPage() {

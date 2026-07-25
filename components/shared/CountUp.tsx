@@ -17,18 +17,26 @@ export function CountUp({
   duration?: number;
 }) {
   const ref = useRef<HTMLSpanElement>(null);
-  const [value, setValue] = useState(0);
+  // Start with the final value for SSR so crawlers see the real number, not "0+"
+  const [value, setValue] = useState(end);
   const [done, setDone] = useState(false);
+  const [hydrated, setHydrated] = useState(false);
 
+  // After hydration, reset to 0 so the animation can run client-side
   useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
     if (typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) {
       setValue(end);
       setDone(true);
       return;
     }
+    setValue(0);
+    setHydrated(true);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    if (!hydrated) return;
+    const el = ref.current;
+    if (!el) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -56,7 +64,7 @@ export function CountUp({
     );
     observer.observe(el);
     return () => observer.disconnect();
-  }, [end, duration, done]);
+  }, [end, duration, done, hydrated]);
 
   return (
     <span ref={ref}>

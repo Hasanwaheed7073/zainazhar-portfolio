@@ -8,6 +8,16 @@ import { Proof } from '@/components/sections/Proof';
 export const metadata: Metadata = {
   title: 'Reverse Recruiter for US Job Seekers',
   description: 'A done-for-you job search run by a reverse recruiter. Daily applications, recruiter outreach, follow-ups, and live reporting for US professionals.',
+  keywords: [
+    'reverse recruiter for job seekers',
+    'done-for-you job search',
+    'managed job search USA',
+    'job search execution service',
+    'ATS resume optimization',
+    'recruiter outreach service',
+    'job search outsourcing',
+    'reverse recruiting for professionals',
+  ],
   alternates: {
     canonical: 'https://zainazhar.vercel.app/job-seekers',
   },
@@ -16,6 +26,11 @@ export const metadata: Metadata = {
     description: 'A done-for-you job search run by a reverse recruiter. Daily applications, recruiter outreach, and follow-ups for US professionals.',
     url: 'https://zainazhar.vercel.app/job-seekers',
     type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Reverse Recruiter for Job Seekers — Zain Azhar',
+    description: 'A done-for-you job search. Daily applications, outreach, follow-ups for US, UK, and Canada professionals.',
   },
 };
 

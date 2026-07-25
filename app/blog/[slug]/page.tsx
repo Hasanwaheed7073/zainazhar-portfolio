@@ -18,7 +18,22 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     description: post.description,
     keywords: post.keywords,
     alternates: { canonical: url },
-    openGraph: { title: post.title, description: post.description, url, type: 'article' },
+    openGraph: {
+      title: post.title,
+      description: post.description,
+      url,
+      type: 'article',
+      publishedTime: `${post.date}T00:00:00+00:00`,
+      modifiedTime: `${post.date}T00:00:00+00:00`,
+      authors: ['Zain Azhar'],
+      section: 'Career Services',
+      tags: post.keywords,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description: post.description,
+    },
   };
 }
 

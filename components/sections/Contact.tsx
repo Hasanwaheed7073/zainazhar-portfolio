@@ -7,7 +7,7 @@ const CALENDAR_URL = 'https://calendar.app.google/MQvjkqsFfvneTyi48';
 const WHATSAPP_URL = 'https://wa.me/923087823424';
 const WHATSAPP_DISPLAY = '+92 308 7823424';
 const EMAIL = 'zeecareers07@gmail.com';
-const LINKEDIN_URL = 'https://www.linkedin.com/in/zain-a-385a0b236/';
+const LINKEDIN_URL = 'https://www.linkedin.com/in/zainazhar/';
 
 export function Contact() {
   return (
@@ -99,7 +99,7 @@ export function Contact() {
                     <p className="text-small font-medium uppercase tracking-[0.14em] text-ink-muted">
                       LinkedIn
                     </p>
-                    <p className="mt-1 text-body font-medium text-navy">linkedin.com/in/zain-a-385a0b236</p>
+                    <p className="mt-1 text-body font-medium text-navy">linkedin.com/in/zainazhar</p>
                   </div>
                   <span aria-hidden="true" className="text-small font-medium text-navy-500">
                     Connect →

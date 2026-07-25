@@ -13,6 +13,19 @@ export const metadata: Metadata = {
     description: 'Plain guides on reverse recruiting and the done-for-you job search.',
     url: 'https://zainazhar.vercel.app/blog',
     type: 'website',
+    images: [
+      {
+        url: 'https://zainazhar.vercel.app/opengraph-image',
+        width: 1200,
+        height: 630,
+        alt: 'Reverse Recruiting Blog — Zain Azhar',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Reverse Recruiting Blog — Zain Azhar',
+    description: 'Plain guides on reverse recruiting and the done-for-you job search. What it is, what it costs, and how to choose well.',
   },
 };
 

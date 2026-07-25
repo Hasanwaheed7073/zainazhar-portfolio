@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEO & Validity Audit — Zain Azhar</title>
+<style>
+  :root {
+    --navy: #0A1F44;
+    --red: #DC2626;
+    --orange: #D97706;
+    --green: #059669;
+    --blue: #2563EB;
+    --bg: #F9FAFB;
+    --card: #FFFFFF;
+    --border: #E5E7EB;
+    --text: #111827;
+    --muted: #6B7280;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+  .header { background: var(--navy); color: white; padding: 40px 48px; }
+  .header h1 { font-size: 1.75rem; font-weight: 700; }
+  .header p { color: #94A3B8; margin-top: 6px; font-size: 0.95rem; }
+  .header .meta { display: flex; gap: 24px; margin-top: 20px; flex-wrap: wrap; }
+  .header .meta span { font-size: 0.85rem; color: #CBD5E1; }
+  .header .meta a { color: #93C5FD; text-decoration: none; }
+  .container { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
+  .score-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 40px; }
+  .score-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 20px; text-align: center; }
+  .score-card .num { font-size: 2.5rem; font-weight: 800; }
+  .score-card .label { font-size: 0.8rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 4px; }
+  .score-card.critical .num { color: var(--red); }
+  .score-card.high .num { color: var(--orange); }
+  .score-card.medium .num { color: var(--blue); }
+  section { margin-bottom: 48px; }
+  section h2 { font-size: 1.2rem; font-weight: 700; color: var(--navy); border-bottom: 2px solid var(--border); padding-bottom: 10px; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+  .issue { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 20px; margin-bottom: 16px; border-left: 4px solid var(--border); }
+  .issue.critical { border-left-color: var(--red); }
+  .issue.high { border-left-color: var(--orange); }
+  .issue.medium { border-left-color: var(--blue); }
+  .issue.good { border-left-color: var(--green); }
+  .issue-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 8px; }
+  .issue-title { font-weight: 700; font-size: 0.975rem; }
+  .badge { font-size: 0.7rem; font-weight: 700; padding: 2px 8px; border-radius: 99px; white-space: nowrap; text-transform: uppercase; letter-spacing: 0.05em; }
+  .badge.critical { background: #FEE2E2; color: var(--red); }
+  .badge.high { background: #FEF3C7; color: #92400E; }
+  .badge.medium { background: #DBEAFE; color: #1E40AF; }
+  .badge.good { background: #D1FAE5; color: #065F46; }
+  .issue p { color: #374151; font-size: 0.9rem; margin-bottom: 10px; }
+  .fix { background: #F0FDF4; border: 1px solid #A7F3D0; border-radius: 6px; padding: 14px; }
+  .fix strong { display: block; font-size: 0.8rem; color: #065F46; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 8px; }
+  pre { background: #1E293B; color: #E2E8F0; border-radius: 6px; padding: 14px; font-size: 0.8rem; overflow-x: auto; white-space: pre-wrap; word-break: break-all; margin-top: 10px; }
+  code { font-family: 'SF Mono', 'Fira Code', monospace; }
+  .action-list { list-style: none; }
+  .action-list li { padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 0.9rem; display: flex; gap: 10px; align-items: flex-start; }
+  .action-list li:last-child { border-bottom: none; }
+  .action-list li::before { content: '→'; color: var(--navy); font-weight: 700; flex-shrink: 0; }
+  .toc { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 20px; margin-bottom: 40px; }
+  .toc h3 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin-bottom: 12px; }
+  .toc a { color: var(--blue); text-decoration: none; font-size: 0.9rem; display: block; padding: 3px 0; }
+  .toc a:hover { text-decoration: underline; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
+  th { background: #F1F5F9; text-align: left; padding: 10px 12px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); }
+  td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+  tr:last-child td { border-bottom: none; }
+  .ok { color: var(--green); font-weight: 700; }
+  .fail { color: var(--red); font-weight: 700; }
+  .warn { color: var(--orange); font-weight: 700; }
+  @media (max-width: 640px) { .score-row { grid-template-columns: 1fr 1fr; } .header { padding: 24px; } }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>SEO & Validity Audit</h1>
+  <p>Full audit of LinkedIn profile and portfolio website — prioritized fixes for ranking improvement</p>
+  <div class="meta">
+    <span>📅 July 2026</span>
+    <span>🔗 <a href="https://zainazhar.vercel.app/" target="_blank">zainazhar.vercel.app</a></span>
+    <span>🔗 <a href="https://www.linkedin.com/in/zain-a-385a0b236/" target="_blank">linkedin.com/in/zain-a-385a0b236</a></span>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="score-row">
+    <div class="score-card critical"><div class="num">5</div><div class="label">Critical Issues</div></div>
+    <div class="score-card high"><div class="num">6</div><div class="label">High Priority</div></div>
+    <div class="score-card medium"><div class="num">5</div><div class="label">Medium Priority</div></div>
+  </div>
+
+  <div class="toc">
+    <h3>Jump to section</h3>
+    <a href="#critical">🔴 Critical Issues</a>
+    <a href="#high">🟠 High Priority</a>
+    <a href="#medium">🔵 Medium Priority</a>
+    <a href="#linkedin">LinkedIn-Specific Fixes</a>
+    <a href="#whats-good">What's Already Good</a>
+    <a href="#checklist">Action Checklist</a>
+  </div>
+
+  <!-- META HEALTH TABLE -->
+  <section>
+    <h2>⚡ Meta Tag Health Check</h2>
+    <table>
+      <tr><th>Tag / Signal</th><th>Homepage</th><th>/job-seekers</th><th>/blog</th><th>/blog/[post]</th></tr>
+      <tr><td>Title tag</td><td class="ok">✓</td><td class="ok">✓</td><td class="ok">✓</td><td class="ok">✓</td></tr>
+      <tr><td>Meta description</td><td class="ok">✓</td><td class="ok">✓</td><td class="ok">✓</td><td class="ok">✓</td></tr>
+      <tr><td>Canonical URL</td><td class="ok">✓</td><td class="ok">✓</td><td class="ok">✓</td><td class="ok">✓</td></tr>
+      <tr><td>og:title (unique per page)</td><td class="ok">✓</td><td class="ok">✓</td><td class="ok">✓</td><td class="ok">✓</td></tr>
+      <tr><td>og:image</td><td class="ok">✓</td><td class="ok">✓</td><td class="fail">✗ Missing</td><td class="warn">⚠ Generic fallback</td></tr>
+      <tr><td>twitter:title (unique per page)</td><td class="ok">✓</td><td class="fail">✗ Wrong value</td><td class="fail">✗ Wrong value</td><td class="fail">✗ Wrong value</td></tr>
+      <tr><td>twitter:description (unique per page)</td><td class="ok">✓</td><td class="fail">✗ Same as homepage</td><td class="fail">✗ Same as homepage</td><td class="fail">✗ Same as homepage</td></tr>
+      <tr><td>twitter:image (unique per page)</td><td class="ok">✓</td><td class="ok">✓</td><td class="fail">✗ Homepage image</td><td class="fail">✗ Homepage image</td></tr>
+      <tr><td>JSON-LD structured data</td><td class="fail">✗ None</td><td class="fail">✗ None</td><td class="fail">✗ None</td><td class="fail">✗ None</td></tr>
+      <tr><td>Article schema (og:type=article)</td><td>N/A</td><td>N/A</td><td>N/A</td><td class="fail">✗ Set but no LD+JSON</td></tr>
+      <tr><td>Viewport meta</td><td class="ok">✓</td><td class="ok">✓</td><td class="ok">✓</td><td class="ok">✓</td></tr>
+      <tr><td>Robots meta (index, follow)</td><td class="ok">✓</td><td class="ok">✓</td><td class="ok">✓</td><td class="ok">✓</td></tr>
+      <tr><td>robots.txt + sitemap.xml</td><td class="ok">✓</td><td>—</td><td>—</td><td>—</td></tr>
+    </table>
+  </section>
+
+  <!-- CRITICAL -->
+  <section id="critical">
+    <h2>🔴 Critical Issues</h2>
+
+    <div class="issue critical">
+      <div class="issue-header">
+        <div class="issue-title">1. No custom domain — running on vercel.app subdomain</div>
+        <span class="badge critical">Critical</span>
+      </div>
+      <p>The site lives at <code>zainazhar.vercel.app</code>. This is the single biggest SEO handicap. Vercel subdomains carry almost no domain authority. Google treats them as generic user-generated pages. A custom domain like <code>zainazhar.com</code> or <code>zainazhar.io</code> would consolidate all ranking signals to a domain you own and control.</p>
+      <div class="fix">
+        <strong>Fix</strong>
+        Buy <code>zainazhar.com</code> (or <code>zainreverserecruiter.com</code> as a keyword-rich option), add it in Vercel's Domains settings, then update all canonicals, sitemap URLs, og:url, og:image URLs, and the LinkedIn portfolio URL. Also add a 301 redirect from the vercel.app URL.
+      </div>
+    </div>
+
+    <div class="issue critical">
+      <div class="issue-header">
+        <div class="issue-title">2. Interview count inconsistency — 3,400 on LinkedIn vs 400 on website</div>
+        <span class="badge critical">Critical</span>
+      </div>
+      <p>LinkedIn headline says <strong>"3400+ Interviews Facilitated"</strong>. The website, blog posts, meta descriptions, and About section all say <strong>"400+ interviews"</strong>. Google's E-E-A-T (Experience, Expertise, Authoritativeness, Trustworthiness) algorithm cross-references your claims. A 10x discrepancy erodes trust and could flag the site as inconsistent or exaggerated.</p>
+      <div class="fix">
+        <strong>Fix</strong>
+        Decide on the real number and make it consistent everywhere: homepage hero stats, About section, meta description, every blog post reference, LinkedIn headline, and LinkedIn About. If 3,400 is accurate, update all website references. If 400 is accurate, fix LinkedIn.
+      </div>
+    </div>
+
+    <div class="issue critical">
+      <div class="issue-header">
+        <div class="issue-title">3. Hero counter stats render as "0+" for search engines</div>
+        <span class="badge critical">Critical</span>
+      </div>
+      <p>The homepage and /job-seekers hero section shows animated counters: "0+ Clients Supported", "0+ Interviews Facilitated", "0+ Years Executing". These are JavaScript-animated — the initial server-rendered HTML contains "0" as the starting value, which is what search engine crawlers read. Googlebot does execute JS but these animations typically start at 0 and count up, so the crawl snapshot often captures the zero state.</p>
+      <div class="fix">
+        <strong>Fix — set the real number as the default HTML value, not 0</strong>
+        <pre><code>&lt;!-- Before (server-renders as 0, JS animates up) --&gt;
+&lt;span data-count="300"&gt;0&lt;/span&gt;+
+
+&lt;!-- After (server-renders the real number, JS can still animate) --&gt;
+&lt;span data-count="300"&gt;300&lt;/span&gt;+</code></pre>
+        If using a counter animation library, set the default slot/initial value to the target number so crawlers always see the real stat.
+      </div>
+    </div>
+
+    <div class="issue critical">
+      <div class="issue-header">
+        <div class="issue-title">4. No JSON-LD structured data on any page</div>
+        <span class="badge critical">Critical</span>
+      </div>
+      <p>Zero structured data across the entire site. Structured data (JSON-LD) helps Google understand who you are, what you offer, and lets your pages qualify for rich results — FAQ dropdowns in SERPs, article authorship, breadcrumbs, and "People Also Ask" entries. This is a significant missed opportunity for a personal brand site with a blog and FAQ sections.</p>
+      <div class="fix">
+        <strong>Fix — paste into &lt;head&gt; on each page type</strong>
+
+        <p style="margin-top:10px;font-weight:700;font-size:0.85rem;">Homepage — Person + Service</p>
+        <pre><code>&lt;script type="application/ld+json"&gt;
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://zainazhar.vercel.app/#zain",
+      "name": "Zain Azhar",
+      "jobTitle": "Reverse Recruiter",
+      "description": "Reverse Recruiter and job search execution partner for career coaches. 5+ years, 300+ clients, US, UK, Canada.",
+      "url": "https://zainazhar.vercel.app",
+      "sameAs": [
+        "https://www.linkedin.com/in/zain-a-385a0b236/"
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Albany",
+        "addressRegion": "NY",
+        "addressCountry": "US"
+      }
+    },
+    {
+      "@type": "Service",
+      "name": "White-Label Reverse Recruiting for Career Coaches",
+      "provider": { "@id": "https://zainazhar.vercel.app/#zain" },
+      "serviceType": "Job Search Execution",
+      "areaServed": ["United States", "United Kingdom", "Canada"],
+      "url": "https://zainazhar.vercel.app"
+    }
+  ]
+}
+&lt;/script&gt;</code></pre>
+
+        <p style="margin-top:14px;font-weight:700;font-size:0.85rem;">Homepage — FAQPage (maps to your FAQ section)</p>
+        <pre><code>&lt;script type="application/ld+json"&gt;
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How does the white-label partnership work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "I operate fully behind your brand. Communication, trackers, and reporting use your templates and client-facing language. Your clients see one team."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What industries do you specialize in?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Healthcare and clinical roles, technology and engineering, product and marketing, customer success, and executive search across the US, UK, and Canada."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How is progress reported?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Live trackers update daily and a written summary lands every Friday covering applications sent, replies, interviews scheduled, and offers in motion."
+      }
+    }
+  ]
+}
+&lt;/script&gt;</code></pre>
+
+        <p style="margin-top:14px;font-weight:700;font-size:0.85rem;">Blog posts — Article schema</p>
+        <pre><code>&lt;script type="application/ld+json"&gt;
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "What Is Reverse Recruiting? A Plain Guide",
+  "author": {
+    "@type": "Person",
+    "name": "Zain Azhar",
+    "url": "https://zainazhar.vercel.app"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "Zain Azhar",
+    "url": "https://zainazhar.vercel.app"
+  },
+  "datePublished": "2025-01-01",
+  "dateModified": "2026-07-01",
+  "url": "https://zainazhar.vercel.app/blog/what-is-reverse-recruiting",
+  "description": "Reverse recruiting is a done-for-you job search. Here is what a reverse recruiter does, who it is for, and how to tell a real service from a volume mill."
+}
+&lt;/script&gt;</code></pre>
+      </div>
+    </div>
+
+    <div class="issue critical">
+      <div class="issue-header">
+        <div class="issue-title">5. LinkedIn URL is a random hash — not a custom URL</div>
+        <span class="badge critical">Critical</span>
+      </div>
+      <p><code>linkedin.com/in/zain-a-385a0b236</code> — the <code>385a0b236</code> suffix is a generated ID. LinkedIn custom URLs rank better in Google for your name-based searches. This URL also appears on your website and in your meta tags, meaning any visitor or crawler following it sees a non-descriptive URL. It's also harder for people to type or remember.</p>
+      <div class="fix">
+        <strong>Fix</strong>
+        Go to LinkedIn → Me → View Profile → Edit Public Profile & URL (top right) → set to <code>linkedin.com/in/zainazhar</code> or <code>linkedin.com/in/zain-azhar</code>. Then update the URL everywhere on your website (footer, contact section, metadata).
+      </div>
+    </div>
+  </section>
+
+  <!-- HIGH PRIORITY -->
+  <section id="high">
+    <h2>🟠 High Priority</h2>
+
+    <div class="issue high">
+      <div class="issue-header">
+        <div class="issue-title">6. Twitter/X meta tags are not page-specific</div>
+        <span class="badge high">High</span>
+      </div>
+      <p>Every page — /job-seekers, /blog, and all blog posts — uses the homepage's <code>twitter:title</code> ("Zain Azhar — Reverse Recruiter for Career Coaches") and <code>twitter:description</code> ("Job search execution partner for career coaches. 300+ clients, 400+ interviews"). When someone shares your /job-seekers or a blog post on Twitter/X, the preview card shows the wrong context. It also signals to social crawlers that these are duplicate pages.</p>
+      <div class="fix">
+        <strong>Fix — make twitter: tags match the page title and og: tags</strong>
+        <pre><code>&lt;!-- /job-seekers --&gt;
+&lt;meta name="twitter:title" content="Reverse Recruiter for Job Seekers — Zain Azhar" /&gt;
+&lt;meta name="twitter:description" content="A done-for-you job search. Daily applications, outreach, follow-ups for US, UK, and Canada professionals." /&gt;
+
+&lt;!-- /blog post --&gt;
+&lt;meta name="twitter:title" content="What Is Reverse Recruiting? A Plain Guide" /&gt;
+&lt;meta name="twitter:description" content="Reverse recruiting is a done-for-you job search run by a specialist. Here is how it works and who it is for." /&gt;</code></pre>
+      </div>
+    </div>
+
+    <div class="issue high">
+      <div class="issue-header">
+        <div class="issue-title">7. Blog index page missing og:image</div>
+        <span class="badge high">High</span>
+      </div>
+      <p>The <code>/blog</code> page has no <code>og:image</code> tag at all. When shared on social media, no preview image will render — just title and description on a blank card. This significantly reduces click-through rate from social shares.</p>
+      <div class="fix">
+        <strong>Fix</strong>
+        Add an og:image to the /blog page. Use the same opengraph image as the homepage, or create a blog-specific banner.
+        <pre><code>&lt;meta property="og:image" content="https://zainazhar.vercel.app/opengraph-image" /&gt;
+&lt;meta property="og:image:alt" content="Reverse Recruiting Blog — Zain Azhar" /&gt;
+&lt;meta property="og:image:width" content="1200" /&gt;
+&lt;meta property="og:image:height" content="630" /&gt;</code></pre>
+      </div>
+    </div>
+
+    <div class="issue high">
+      <div class="issue-header">
+        <div class="issue-title">8. Blog posts missing article:published_time and article:author OG tags</div>
+        <span class="badge high">High</span>
+      </div>
+      <p>Your blog posts set <code>og:type = article</code> correctly but don't include the matching article-type Open Graph tags. Google uses <code>article:published_time</code> to assess freshness and <code>article:author</code> to attribute content to your Person entity. Missing these weakens your blog's topical authority signals.</p>
+      <div class="fix">
+        <strong>Fix — add to each blog post's &lt;head&gt;</strong>
+        <pre><code>&lt;meta property="article:author" content="Zain Azhar" /&gt;
+&lt;meta property="article:published_time" content="2025-09-01T00:00:00+00:00" /&gt;
+&lt;meta property="article:modified_time" content="2026-07-01T00:00:00+00:00" /&gt;
+&lt;meta property="article:section" content="Career Services" /&gt;
+&lt;meta property="article:tag" content="reverse recruiting" /&gt;</code></pre>
+      </div>
+    </div>
+
+    <div class="issue high">
+      <div class="issue-header">
+        <div class="issue-title">9. format-detection meta tag blocking phone/email on mobile</div>
+        <span class="badge high">High</span>
+      </div>
+      <p><code>meta name="format-detection" content="telephone=no, address=no, email=no"</code> tells mobile browsers NOT to auto-detect and link your phone numbers and email addresses. Your main CTAs are WhatsApp (<code>+92 308 7823424</code>) and email — disabling auto-detection means mobile users can't tap to call or email directly from un-linked text. This hurts mobile conversion.</p>
+      <div class="fix">
+        <strong>Fix</strong>
+        Remove the format-detection meta tag entirely, or change it to allow phone and email detection:
+        <pre><code>&lt;!-- Remove this line entirely --&gt;
+&lt;meta name="format-detection" content="telephone=no, address=no, email=no" /&gt;
+
+&lt;!-- Your WhatsApp and email links are already properly wrapped in &lt;a href="tel:"&gt;
+     and &lt;a href="mailto:"&gt; so auto-detection adds a useful fallback --&gt;</code></pre>
+      </div>
+    </div>
+
+    <div class="issue high">
+      <div class="issue-header">
+        <div class="issue-title">10. External links missing rel="noopener noreferrer"</div>
+        <span class="badge high">High</span>
+      </div>
+      <p>Links to Google Sheets trackers, Google Docs (offer letters, interview records), and external services open in a new tab but lack <code>rel="noopener noreferrer"</code>. This is both a security issue (tab-napping vulnerability) and a minor PageRank consideration.</p>
+      <div class="fix">
+        <strong>Fix — add to all external links that use target="_blank"</strong>
+        <pre><code>&lt;a href="https://docs.google.com/spreadsheets/..."
+   target="_blank"
+   rel="noopener noreferrer"&gt;Open →&lt;/a&gt;</code></pre>
+        In Next.js, if using the Link component for external URLs, add <code>rel="noopener noreferrer"</code> as a prop.
+      </div>
+    </div>
+
+    <div class="issue high">
+      <div class="issue-header">
+        <div class="issue-title">11. LinkedIn profile sections — low public visibility</div>
+        <span class="badge high">High</span>
+      </div>
+      <p>From the public-facing profile, only your headline and location are visible without login. The About section, experience details, and skills are collapsed or hidden. LinkedIn's SEO works through keyword-rich text in your About, Experience, and Skills sections — if these are thin or set to private, you won't rank in LinkedIn search results or Google searches like "reverse recruiter Albany NY".</p>
+      <div class="fix">
+        <strong>Fix</strong>
+        Settings & Privacy → Visibility → Edit your public profile → make About, Experience, Skills, and Recommendations all visible to "Everyone". Then ensure your About section opens with a keyword-rich first two lines (these appear in Google's snippet without truncation).
+        <pre><code>Suggested About opening:
+"Reverse Recruiter based in Albany, NY. I run end-to-end job search execution
+for career coaches as a white-label execution partner — applications, recruiter
+outreach, follow-ups, and weekly reporting — across the US, UK, and Canada.
+300+ clients supported. 3,400+ interviews facilitated in 5 years."</code></pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- MEDIUM -->
+  <section id="medium">
+    <h2>🔵 Medium Priority</h2>
+
+    <div class="issue medium">
+      <div class="issue-header">
+        <div class="issue-title">12. /job-seekers page keywords are identical to homepage</div>
+        <span class="badge medium">Medium</span>
+      </div>
+      <p>Both the homepage and /job-seekers share the exact same <code>meta-keywords</code> tag. While Google doesn't directly use the keywords meta tag as a ranking factor, having identical keyword meta signals across pages is a symptom of insufficient page differentiation — and the underlying SEO targeting should be different for each audience.</p>
+      <div class="fix">
+        <strong>Fix — update /job-seekers keywords to job-seeker terms</strong>
+        <pre><code>&lt;meta name="keywords" content="reverse recruiter for job seekers,done-for-you job search,
+managed job search USA,job search execution service,ATS resume optimization,
+recruiter outreach service,job search outsourcing,reverse recruiting for professionals" /&gt;</code></pre>
+      </div>
+    </div>
+
+    <div class="issue medium">
+      <div class="issue-header">
+        <div class="issue-title">13. robots.txt uses non-standard "Host:" directive</div>
+        <span class="badge medium">Medium</span>
+      </div>
+      <p>Your robots.txt includes <code>Host: https://zainazhar.vercel.app</code>. This directive is only recognized by Yandex (Russian search engine) — Google, Bing, and others ignore it entirely. It doesn't hurt, but it's noise and adds confusion when debugging crawl issues.</p>
+      <div class="fix">
+        <strong>Fix — simplify your robots.txt</strong>
+        <pre><code>User-agent: *
+Allow: /
+
+Sitemap: https://zainazhar.vercel.app/sitemap.xml</code></pre>
+      </div>
+    </div>
+
+    <div class="issue medium">
+      <div class="issue-header">
+        <div class="issue-title">14. Professional email not used — Gmail address as primary contact</div>
+        <span class="badge medium">Medium</span>
+      </div>
+      <p>The contact email throughout the site is <code>zeecareers07@gmail.com</code>. For a professional B2B service targeting career coaches, a Gmail address reduces perceived authority. When you move to a custom domain, you should set up <code>zain@[yourdomain].com</code>. Google Workspace costs ~$6/month.</p>
+      <div class="fix">
+        <strong>Fix</strong>
+        After purchasing a custom domain, set up Google Workspace or Zoho Mail and update the email in: footer, contact section, mailto: links, meta tags, and LinkedIn contact info.
+      </div>
+    </div>
+
+    <div class="issue medium">
+      <div class="issue-header">
+        <div class="issue-title">15. No BreadcrumbList schema on sub-pages and blog posts</div>
+        <span class="badge medium">Medium</span>
+      </div>
+      <p>Blog posts and specialty pages (/reverse-recruiter/healthcare, etc.) would benefit from BreadcrumbList structured data. This enables breadcrumb display in Google search results, which increases click-through rate.</p>
+      <div class="fix">
+        <strong>Fix — add to blog posts</strong>
+        <pre><code>&lt;script type="application/ld+json"&gt;
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://zainazhar.vercel.app"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://zainazhar.vercel.app/blog"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "What Is Reverse Recruiting?",
+      "item": "https://zainazhar.vercel.app/blog/what-is-reverse-recruiting"
+    }
+  ]
+}
+&lt;/script&gt;</code></pre>
+      </div>
+    </div>
+
+    <div class="issue medium">
+      <div class="issue-header">
+        <div class="issue-title">16. Google Search Console not verified (cannot confirm)</div>
+        <span class="badge medium">Medium</span>
+      </div>
+      <p>There's no visible Google Search Console verification meta tag or DNS record in the fetched pages. If GSC isn't set up, you have no visibility into which queries drive traffic, what your click-through rates are, or whether Google is crawling all your pages. It's a free tool that's essential for SEO management.</p>
+      <div class="fix">
+        <strong>Fix</strong>
+        Go to <a href="https://search.google.com/search-console" target="_blank">search.google.com/search-console</a>, add your property, verify via the HTML meta tag method, then submit your sitemap (https://zainazhar.vercel.app/sitemap.xml). Also set up Google Analytics 4 if not already running.
+      </div>
+    </div>
+  </section>
+
+  <!-- LINKEDIN -->
+  <section id="linkedin">
+    <h2>💼 LinkedIn-Specific Fixes</h2>
+
+    <div class="issue high">
+      <div class="issue-header">
+        <div class="issue-title">Set your custom LinkedIn URL immediately</div>
+        <span class="badge critical">Do First</span>
+      </div>
+      <p>Me → View Profile → Edit Public Profile & URL → change to <code>linkedin.com/in/zainazhar</code> (check availability first). This is a 30-second fix that permanently improves your name-based search ranking on both LinkedIn and Google.</p>
+    </div>
+
+    <div class="issue medium">
+      <div class="issue-header">
+        <div class="issue-title">LinkedIn Services page — activate "Providing Services"</div>
+        <span class="badge high">High</span>
+      </div>
+      <p>LinkedIn has a "Services" section on profiles (separate from your Experience). Enable it and list: Reverse Recruiting, Job Search Strategy, White-Label Recruiting, ATS Resume Optimization. This puts you in LinkedIn's Services Marketplace and adds a "See services" button to your profile card that appears in search results.</p>
+      <div class="fix"><strong>Fix</strong> Me → View Profile → Open to → Providing Services → add your services.</div>
+    </div>
+
+    <div class="issue medium">
+      <div class="issue-header">
+        <div class="issue-title">Featured section — pin your portfolio and best proof</div>
+        <span class="badge medium">Medium</span>
+      </div>
+      <p>Add a Featured section with: (1) a link to zainazhar.vercel.app, (2) a link to the Master Client Interviews Google Doc, (3) your best-performing blog post. The Featured section appears prominently in LinkedIn search results and on your profile card.</p>
+    </div>
+
+    <div class="issue medium">
+      <div class="issue-header">
+        <div class="issue-title">Skills section — must match your target search terms</div>
+        <span class="badge medium">Medium</span>
+      </div>
+      <p>LinkedIn's algorithm uses skills as ranking signals for recruiter and user searches. Ensure these exact skills are listed and endorsed: Reverse Recruiting, Job Search Strategy, ATS Optimization, LinkedIn Outreach, White Label Recruiting, Executive Search, Career Coaching Support, Talent Sourcing.</p>
+    </div>
+
+    <div class="issue medium">
+      <div class="issue-header">
+        <div class="issue-title">Headline keyword order — put the most searched term first</div>
+        <span class="badge medium">Medium</span>
+      </div>
+      <p>Current headline: "Reverse Recruiter | White Label Job Search Execution for Career Coaches | 3400+ Interviews Facilitated | US · UK · Canada". This is good. But LinkedIn truncates headlines in search results at ~60 characters. "Reverse Recruiter" appears first which is correct — keep it there.</p>
+      <div class="fix"><strong>Suggested headline:</strong> <code>Reverse Recruiter for Career Coaches | White-Label Job Search Execution | 3,400+ Interviews | US · UK · Canada</code></div>
+    </div>
+  </section>
+
+  <!-- WHAT'S GOOD -->
+  <section id="whats-good">
+    <h2>✅ What's Already Good</h2>
+
+    <div class="issue good">
+      <div class="issue-header"><div class="issue-title">Strong on-page keyword targeting</div><span class="badge good">Good</span></div>
+      <p>The homepage title, H1, meta description, and body copy naturally incorporate "reverse recruiter", "career coaches", "white-label", "job search execution", and geo-targets (US, UK, Canada) without stuffing. This is correct SEO copywriting.</p>
+    </div>
+
+    <div class="issue good">
+      <div class="issue-header"><div class="issue-title">Specialty landing pages (/reverse-recruiter/healthcare, etc.)</div><span class="badge good">Good</span></div>
+      <p>Having separate pages per vertical (healthcare, tech sales, product, etc.) is excellent topical depth. These pages target long-tail queries like "reverse recruiter for healthcare professionals" and build topical authority over the primary keyword.</p>
+    </div>
+
+    <div class="issue good">
+      <div class="issue-header"><div class="issue-title">Active blog with well-targeted articles</div><span class="badge good">Good</span></div>
+      <p>8 blog posts targeting key informational queries ("what is reverse recruiting", "reverse recruiter vs career coach", "how to beat ATS systems"). These are exactly the right terms to target. The writing is clear and non-thin — articles like these are what builds organic search traffic over time.</p>
+    </div>
+
+    <div class="issue good">
+      <div class="issue-header"><div class="issue-title">Core meta setup is solid</div><span class="badge good">Good</span></div>
+      <p>Canonical tags, Open Graph titles, descriptions, robots meta, viewport, sitemap.xml, and robots.txt are all properly configured. The og:image dimensions (1200×630) are correct. Twitter card type (summary_large_image) is correct.</p>
+    </div>
+
+    <div class="issue good">
+      <div class="issue-header"><div class="issue-title">Live proof trackers — excellent trust signal</div><span class="badge good">Good</span></div>
+      <p>Linking to real Google Sheets with actual client campaigns is a strong E-E-A-T (Experience) signal. No competitor does this. If Google can crawl and understand these links as proof of real work, this is a significant authority differentiator.</p>
+    </div>
+  </section>
+
+  <!-- CHECKLIST -->
+  <section id="checklist">
+    <h2>📋 Prioritized Action Checklist</h2>
+    <ul class="action-list">
+      <li><strong>TODAY:</strong> Set LinkedIn custom URL to linkedin.com/in/zainazhar (2 mins)</li>
+      <li><strong>TODAY:</strong> Decide on your interview count (3,400 or 400) and make it consistent on LinkedIn, website, meta descriptions, and blog posts</li>
+      <li><strong>THIS WEEK:</strong> Purchase a custom domain (zainazhar.com) and connect it in Vercel — biggest single SEO move you can make</li>
+      <li><strong>THIS WEEK:</strong> Fix hero counter stats to render real numbers server-side (not 0) — update the initial value in your JSX/HTML</li>
+      <li><strong>THIS WEEK:</strong> Add JSON-LD structured data — at minimum Person + FAQPage on homepage, Article on each blog post</li>
+      <li><strong>THIS WEEK:</strong> Remove or fix the format-detection meta tag so mobile users can tap your phone/email</li>
+      <li><strong>THIS WEEK:</strong> Fix twitter:title and twitter:description on /job-seekers, /blog, and blog posts to be page-specific</li>
+      <li><strong>THIS WEEK:</strong> Add og:image to the /blog index page</li>
+      <li><strong>THIS MONTH:</strong> Add article:published_time, article:modified_time, article:author to all blog posts</li>
+      <li><strong>THIS MONTH:</strong> Set up Google Search Console, verify the site, submit sitemap</li>
+      <li><strong>THIS MONTH:</strong> Add rel="noopener noreferrer" to all external links</li>
+      <li><strong>THIS MONTH:</strong> Activate LinkedIn "Providing Services", add Featured section with portfolio link, ensure Skills are filled</li>
+      <li><strong>THIS MONTH:</strong> Add BreadcrumbList JSON-LD to blog posts and specialty pages</li>
+      <li><strong>ONGOING:</strong> Update LinkedIn About section to be keyword-rich in the first 2 lines</li>
+      <li><strong>ONGOING:</strong> Post on LinkedIn 3–5x per week — LinkedIn's algorithm heavily rewards activity for search ranking</li>
+    </ul>
+  </section>
+
+</div>
+</body>
+</html>

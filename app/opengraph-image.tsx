@@ -82,7 +82,7 @@ export default async function OG() {
               maxWidth: 980,
             }}
           >
-            300+ clients. 400+ interviews. United States, United Kingdom, Canada.
+            300+ clients. 3,400+ interviews. United States, United Kingdom, Canada.
           </div>
         </div>
 

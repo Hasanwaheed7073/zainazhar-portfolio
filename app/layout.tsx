@@ -17,9 +17,9 @@ export const metadata: Metadata = {
     default: 'Zain Azhar — Reverse Recruiter for Career Coaches',
     template: '%s — Zain Azhar',
   },
-  description: 'Reverse Recruiter for career coaches. I run job search execution behind the scenes. 300+ clients, 400+ interviews across United States, United Kingdom, and Canada.',
+  description: 'Reverse Recruiter for career coaches. I run job search execution behind the scenes. 300+ clients, 3,400+ interviews across United States, United Kingdom, and Canada.',
   applicationName: 'Zain Azhar — Reverse Recruiter',
-  authors: [{ name: 'Zain Azhar', url: 'https://www.linkedin.com/in/zain-a-385a0b236/' }],
+  authors: [{ name: 'Zain Azhar', url: 'https://www.linkedin.com/in/zainazhar/' }],
   creator: 'Zain Azhar',
   publisher: 'Zain Azhar',
   keywords: [
@@ -56,12 +56,12 @@ export const metadata: Metadata = {
     url: 'https://zainazhar.vercel.app',
     siteName: 'Zain Azhar',
     title: 'Zain Azhar — Reverse Recruiter for Career Coaches',
-    description: 'I run job search execution behind the scenes for career coaches. 300+ clients, 400+ interviews across United States, United Kingdom, and Canada.',
+    description: 'I run job search execution behind the scenes for career coaches. 300+ clients, 3,400+ interviews across United States, United Kingdom, and Canada.',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Zain Azhar — Reverse Recruiter for Career Coaches',
-    description: 'Job search execution partner for career coaches. 300+ clients, 400+ interviews.',
+    description: 'Job search execution partner for career coaches. 300+ clients, 3,400+ interviews.',
     creator: '@zainazhar',
   },
   icons: {
@@ -69,11 +69,6 @@ export const metadata: Metadata = {
     apple: '/meta-logo.png',
   },
   category: 'Career Services',
-  formatDetection: {
-    email: false,
-    address: false,
-    telephone: false,
-  },
 };
 
 export const viewport = {
