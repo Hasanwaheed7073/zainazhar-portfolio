@@ -6,7 +6,11 @@ export const SITE = {
   url: 'https://zainazhar.vercel.app',
 } as const;
 
-export type PostBlock = { type: 'h2' | 'p'; text: string };
+export type PostBlock =
+  | { type: 'h2' | 'p'; text: string }
+  | { type: 'ul'; items: string[] }
+  | { type: 'table'; caption: string; headers: string[]; rows: string[][] }
+  | { type: 'cite'; text: string; href: string; source: string };
 export type PostFaq = { q: string; a: string };
 export type Post = {
   slug: string;
@@ -15,6 +19,8 @@ export type Post = {
   h1: string;
   dek: string;
   date: string;
+  /** Visible "Updated" date + dateModified in Article schema. Defaults to date. */
+  updated?: string;
   keywords: string[];
   body: PostBlock[];
   faq: PostFaq[];
@@ -60,19 +66,46 @@ export const POSTS: Post[] = [
     h1: 'How much does a reverse recruiter cost?',
     dek: 'Pricing for reverse recruiting is all over the map. Here is how the common models work, so you can compare offers without guessing.',
     date: '2026-05-30',
+    updated: '2026-08-02',
     keywords: ['reverse recruiter cost', 'reverse recruiting pricing', 'how much does reverse recruiting cost', 'reverse recruiter'],
     body: [
-      { type: 'p', text: 'There is no single price for reverse recruiting. What you pay depends on the model, your seniority, and how much of the work is done by a real person versus a tool. Knowing the structures helps you compare offers on the same terms.' },
-      { type: 'h2', text: 'The common pricing models' },
+      { type: 'p', text: 'There is no single price for reverse recruiting. What you pay depends on the model, your seniority, and how much of the work is done by a real person versus a tool. As a general guide in 2026, monthly retainers commonly run from a few hundred dollars to roughly two thousand dollars, and senior or executive packages cost more. Knowing the structures helps you compare offers on the same terms.' },
+      { type: 'h2', text: 'What are the common pricing models?' },
       { type: 'p', text: 'Most services use one of three structures. A monthly retainer, where you pay a flat fee for a set volume of applications and outreach each month. A pay as you go credit model, where you buy blocks of applications and use them when you want. Or a success based fee, where part of the cost is tied to landing an offer. Some services mix a retainer with a smaller success fee.' },
-      { type: 'h2', text: 'Rough market ranges' },
-      { type: 'p', text: 'As a general guide in 2026, monthly retainers commonly run from a few hundred dollars to roughly two thousand dollars, depending on volume and how tailored the work is. Senior and executive packages cost more and can reach five figures, since the outreach is more targeted and the stakes are higher. Pure volume services that spray applications sit at the low end, but low cost and low targeting tend to go together.' },
-      { type: 'h2', text: 'What actually drives the price' },
+      {
+        type: 'table',
+        caption: 'Reverse recruiting pricing models compared (2026)',
+        headers: ['Pricing model', 'Typical range', 'Best for', 'Watch out for'],
+        rows: [
+          ['Monthly retainer', 'A few hundred dollars to ~$2,000 per month', 'Steady searches that need consistent weekly volume', 'Vague deliverables. Ask exactly how many applications and outreach messages per week.'],
+          ['Pay as you go credits', 'Priced per application block', 'Testing a service, or topping up your own search', 'Credits that expire, and per-unit quality dropping at volume'],
+          ['Success based fee', 'Percentage of salary or flat bonus on offer', 'Candidates who want incentives aligned', 'Fine print on what counts as an offer, and hybrid fees stacked on a retainer'],
+          ['Executive packages', 'Higher retainers, can reach five figures', 'Director, VP, and C-level searches needing discretion', 'Paying an executive price for a volume process. Ask who does the outreach.'],
+        ],
+      },
+      { type: 'h2', text: 'What drives the price up or down?' },
       { type: 'p', text: 'Three things move the number. Human effort, since real people writing tailored applications and outreach costs more than a bot. Targeting, since narrow, well researched outreach takes more time than mass applying. And seniority, since executive searches need more care and discretion. Pay attention to what you get for the fee, not just the fee.' },
-      { type: 'h2', text: 'How to judge value before you pay' },
+      { type: 'p', text: 'Pure volume services that spray applications sit at the low end of every range, but low cost and low targeting tend to go together. A hundred generic applications is not more valuable than fifteen targeted ones. It is usually worth less, because generic applications rarely pass screening and can burn your name at companies you actually want.' },
+      { type: 'h2', text: 'How does the fee compare to the cost of a longer search?' },
+      { type: 'p', text: 'The fee looks different once you price the alternative. Every extra month of searching costs a month of your target salary. For someone aiming at a $120,000 role, that is $10,000 of forgone pay per month, more than most retainers cost across an entire engagement.' },
+      { type: 'cite', text: 'The timeline risk is real. U.S. Bureau of Labor Statistics data for May 2026 puts the median duration of unemployment at 11.6 weeks, with over 42 percent of unemployed workers searching for 15 weeks or longer.', href: 'https://www.bls.gov/news.release/empsit.t12.htm', source: 'BLS, Table A-12: Unemployed people by duration of unemployment' },
+      { type: 'p', text: 'That is the honest math: the question is not whether the fee is large, but whether consistent daily execution shortens the search by more than the fee costs. For mid-level and senior salaries, one saved month usually covers it.' },
+      { type: 'h2', text: 'How do you judge value before you pay?' },
       { type: 'p', text: 'Cheap is not the same as good value. Ask what is included, who does the work, and what proof of past results they can show. A higher fee with real human execution and live proof often beats a cheap plan that floods boards with the same resume. The goal is interviews, not application count.' },
+      {
+        type: 'ul',
+        items: [
+          'Who writes and sends the applications: a named person, or a bot and templates?',
+          'What exactly is included per week: applications, recruiter outreach, hiring manager outreach, follow-ups, reporting?',
+          'Can they show live proof of past campaigns, not just testimonials?',
+          'How do they target roles: by scope and seniority, or by keyword spraying?',
+          'What happens if the strategy is not converting: is there a real person who adjusts it?',
+        ],
+      },
+      { type: 'h2', text: 'What red flags should make you walk away?' },
+      { type: 'p', text: 'Guaranteed job offers, since no honest service controls hiring decisions. Hundreds of applications per day, which means zero targeting. No visibility into what is sent or to whom. And pricing pages with no discovery call, because a real service needs to understand your target before quoting a scope.' },
       { type: 'h2', text: 'Getting a number for your search' },
-      { type: 'p', text: 'The honest answer to what it will cost you is that it depends on your target roles and how much execution you want handled. If you tell me where you are aiming, I can walk you through what a fit looks like.' },
+      { type: 'p', text: 'The honest answer to what it will cost you is that it depends on your target roles and how much execution you want handled. I run every campaign with real human execution and live trackers you can inspect before paying anything. If you tell me where you are aiming, I can walk you through what a fit looks like.' },
     ],
     faq: [
       { q: 'Is a more expensive reverse recruiter always better?', a: 'No. Price tracks human effort and targeting, not guaranteed results. Judge value by what is included and the proof of past campaigns.' },
@@ -156,6 +189,7 @@ export const POSTS: Post[] = [
     keywords: ['how to beat ATS', 'ATS resume tips', 'applicant tracking system', 'ATS optimization', 'resume ATS friendly'],
     body: [
       { type: 'p', text: 'Applicant tracking systems are the gatekeepers of modern hiring. Before a recruiter reads your resume, ATS software parses, scores, and ranks it. If it scores low, no human ever sees it. Understanding how these systems work is the first step to getting through.' },
+      { type: 'cite', text: 'This is not a fringe problem. Harvard Business School research found that automated hiring systems filter out millions of viable candidates, often for reasons as small as formatting or missing keywords rather than actual qualifications.', href: 'https://www.hbs.edu/managing-the-future-of-work/Documents/research/hiddenworkers09032021.pdf', source: 'Harvard Business School, Hidden Workers: Untapped Talent (2021)' },
       { type: 'h2', text: 'How ATS software actually works' },
       { type: 'p', text: 'An ATS reads your resume as plain text. It looks for keywords that match the job description, checks for standard section headers like Experience and Education, and tries to extract your job titles, dates, and skills. If the system cannot parse your formatting, it treats the content as missing.' },
       { type: 'h2', text: 'Formatting rules that matter' },
@@ -193,6 +227,19 @@ export const POSTS: Post[] = [
       { type: 'p', text: 'A reverse recruiter takes over the daily execution of your job search. They find roles, write and submit applications, reach out to recruiters and hiring managers, follow up, and track the pipeline. They do the work, not the strategy behind it.' },
       { type: 'h2', text: 'Strategy vs execution' },
       { type: 'p', text: 'Think of it this way. A coach gives you the game plan. A reverse recruiter runs the plays. You can have a perfect strategy and still not land interviews if nobody is running the search consistently. And you can have someone running a search all day, but if the positioning is off, the applications will not convert.' },
+      {
+        type: 'table',
+        caption: 'Career coach vs reverse recruiter at a glance',
+        headers: ['', 'Career coach', 'Reverse recruiter'],
+        rows: [
+          ['Core job', 'Strategy, positioning, mindset, interview prep', 'Daily execution: applications, outreach, follow-ups'],
+          ['Who does the applying', 'You do, with their guidance', 'They do, on your behalf'],
+          ['Main deliverable', 'Clarity, a stronger story, interview readiness', 'A managed pipeline and interviews on the calendar'],
+          ['Best when', 'You are unclear on direction or underselling yourself', 'You know the target but lack time to run the search'],
+          ['Typical engagement', 'Sessions, weekly or biweekly', 'Continuous daily work with tracking and reporting'],
+          ['Solves', 'The what and the how to say it', 'The actually getting it done'],
+        ],
+      },
       { type: 'h2', text: 'When you need a coach' },
       { type: 'p', text: 'If you are unclear on what roles to target, your resume does not reflect your real value, or you need interview prep and confidence work, start with a coach. Get the strategy right first.' },
       { type: 'h2', text: 'When you need a reverse recruiter' },
@@ -220,6 +267,7 @@ export const POSTS: Post[] = [
     keywords: ['how long does a job search take', 'average job search length', 'job search timeline 2026', 'how long to find a job'],
     body: [
       { type: 'p', text: 'In 2026, the average job search for mid-level to senior professionals runs three to six months. Some searches close in six weeks. Some drag past nine months. The difference almost always comes down to consistency, targeting, and volume of quality outreach.' },
+      { type: 'cite', text: 'Government data backs the range. As of May 2026, the U.S. Bureau of Labor Statistics reports a median unemployment duration of 11.6 weeks, a mean of 26 weeks, and more than 42 percent of unemployed workers searching for 15 weeks or longer.', href: 'https://www.bls.gov/news.release/empsit.t12.htm', source: 'BLS, Table A-12: Unemployed people by duration of unemployment (May 2026)' },
       { type: 'h2', text: 'What makes a search fast' },
       { type: 'p', text: 'Searches that close quickly share three traits. The candidate has a clear target. Applications go out daily, tailored to each role. And outreach to recruiters and hiring managers happens alongside applications, not instead of them. Speed comes from running all three in parallel, every working day.' },
       { type: 'h2', text: 'What makes a search slow' },
@@ -248,21 +296,49 @@ export const POSTS: Post[] = [
     h1: 'How to choose the best reverse recruiter service',
     dek: 'The market is full of reverse recruiting services. Some deliver. Most do not. Here is how to tell the difference before you spend a dollar.',
     date: '2026-07-10',
+    updated: '2026-08-02',
     keywords: ['best reverse recruiter services', 'best reverse recruiting service', 'top reverse recruiters', 'how to choose a reverse recruiter', 'reverse recruiting reviews'],
     body: [
-      { type: 'p', text: 'Reverse recruiting is growing fast, and so is the number of services claiming to run your search. Some are genuine execution partners. Others are volume mills that spray your resume everywhere and call it done. Knowing what to look for saves you time, money, and frustration.' },
+      { type: 'p', text: 'The best reverse recruiter service is the one that runs real human execution, shows live proof of past campaigns, and knows your industry. Reverse recruiting is growing fast, and so is the number of services claiming to run your search. Some are genuine execution partners. Others are volume mills that spray your resume everywhere and call it done. Knowing what to look for saves you time, money, and frustration.' },
       { type: 'h2', text: 'The first question: who does the work?' },
-      { type: 'p', text: 'The most important question to ask any reverse recruiting service is who actually writes and sends your applications. If it is a bot or an overseas team running templates, the quality will reflect that. Real human execution, by someone who reads the job description and tailors each application, is the baseline for a service worth paying for.' },
-      { type: 'h2', text: 'Look for live proof' },
-      { type: 'p', text: 'Testimonials are easy to fake. Live campaign trackers are not. Ask to see real examples of past searches. A good service will show you the volume, the outreach, the replies, and the outcomes. If they cannot show proof, that is a signal.' },
-      { type: 'h2', text: 'Red flags to watch for' },
-      { type: 'p', text: 'Guaranteed job offers. Hundreds of applications per day. No transparency into what is being sent or to whom. One-size-fits-all pricing with no discovery call. These are signs of a volume operation, not a targeted service.' },
-      { type: 'h2', text: 'What a good service includes' },
-      { type: 'p', text: 'Targeted role sourcing. Tailored, ATS-optimized applications. Direct outreach to recruiters and hiring managers. Systematic follow-ups. A live tracker showing progress. Weekly reporting. And a real person you can talk to when strategy needs adjusting.' },
-      { type: 'h2', text: 'Specialty matters' },
-      { type: 'p', text: 'A reverse recruiter who has run campaigns in your industry will write better applications and know where to find the right roles. Ask about their experience in your field, whether that is healthcare, tech sales, product management, marketing, engineering, or executive search.' },
+      { type: 'p', text: 'The most important question to ask any reverse recruiting service is who actually writes and sends your applications. If it is a bot or an anonymous team running templates, the quality will reflect that. Real human execution, by someone who reads the job description and tailors each application, is the baseline for a service worth paying for.' },
+      { type: 'p', text: 'This matters more than it used to. Automated screening already filters aggressively on the employer side, so an automated service on the candidate side means software talking to software with your career in the middle. Tailoring is the part machines still do badly, and it is the part that gets replies.' },
+      { type: 'cite', text: 'Harvard Business School research on hidden workers found that automated hiring filters screen out millions of qualified candidates before a human ever reviews them, which is exactly why generic mass applications underperform.', href: 'https://www.hbs.edu/managing-the-future-of-work/Documents/research/hiddenworkers09032021.pdf', source: 'Harvard Business School, Hidden Workers: Untapped Talent (2021)' },
+      { type: 'h2', text: 'How do you verify a service is legitimate?' },
+      { type: 'p', text: 'Testimonials are easy to fake. Live campaign trackers are not. Ask to see real examples of past searches. A good service will show you the volume, the outreach, the replies, and the outcomes. If they cannot show proof, that is a signal. Review sites help for spotting patterns of complaints, but the strongest evidence is primary: the actual work product of past campaigns.' },
+      { type: 'h2', text: 'What separates a real service from a volume mill?' },
+      {
+        type: 'table',
+        caption: 'Evaluating a reverse recruiting service: what to ask and what the answers mean',
+        headers: ['What to ask', 'A good answer looks like', 'A red flag looks like'],
+        rows: [
+          ['Who writes my applications?', 'A named person who tailors each one to the job description', 'A bot, AI templates, or no clear answer'],
+          ['Can I see proof of past campaigns?', 'Live trackers with applications, replies, and outcomes', 'Only testimonials and screenshots'],
+          ['How many applications per week?', 'A targeted number, typically 15 to 25, with outreach alongside', 'Hundreds per day, positioned as a feature'],
+          ['Do you do recruiter and hiring manager outreach?', 'Yes, daily, written per role', 'Applications only, or automated connection spam'],
+          ['How do I see progress?', 'A live tracker plus scheduled reporting', 'Trust us, updates when there is news'],
+          ['Do you guarantee a job?', 'No, and an explanation of what they do control', 'Yes, or a guarantee with buried fine print'],
+          ['Do you know my industry?', 'Named campaigns in your field you can inspect', 'We work with everyone'],
+        ],
+      },
+      { type: 'h2', text: 'What should a good service include?' },
+      {
+        type: 'ul',
+        items: [
+          'Targeted role sourcing matched to your scope and seniority, not just keywords',
+          'Tailored, ATS-optimized applications written per job description',
+          'Direct outreach to recruiters and hiring managers, written like a human',
+          'Systematic follow-ups on a schedule, since most candidates never follow up',
+          'A live tracker showing every application, contact, and reply',
+          'Weekly reporting and a real person who adjusts strategy when something is not converting',
+        ],
+      },
+      { type: 'h2', text: 'Why does specialty matter?' },
+      { type: 'p', text: 'A reverse recruiter who has run campaigns in your industry will write better applications and know where to find the right roles. Healthcare and clinical research roles move through strict portals and compliance-heavy screening. Tech sales rewards speed and direct outreach. Product and engineering roles have title fragmentation that keyword searches miss. Executive searches need discretion above all. Ask about their experience in your field, and ask to see it, not just hear about it.' },
+      { type: 'h2', text: 'How should you compare pricing?' },
+      { type: 'p', text: 'Price tracks human effort and targeting, not outcomes. Monthly retainers in 2026 commonly run from a few hundred dollars to roughly two thousand, with executive packages higher. The full breakdown is in my pricing guide, but the short version: compare what is included per week and who does the work, not the headline number. A cheap plan that produces zero interviews is the most expensive option on the market.' },
       { type: 'h2', text: 'How I work' },
-      { type: 'p', text: 'I run every search with real human execution, tailored applications, direct outreach, and live trackers you can view at any time. More than 300 clients supported across healthcare, tech, marketing, product, and executive roles. If you want to see what a managed search looks like, the proof section on this site shows real campaigns.' },
+      { type: 'p', text: 'I run every search with real human execution, tailored applications, direct outreach, and live trackers you can view at any time. More than 5 years of this work, 300+ clients supported, and 3,400+ interviews facilitated across healthcare, tech, marketing, product, engineering, and executive roles in the United States, United Kingdom, and Canada. If you want to see what a managed search looks like, the proof section on this site shows real campaigns, not summaries of them.' },
     ],
     faq: [
       { q: 'How do I verify a reverse recruiter is legitimate?', a: 'Ask for live proof of past campaigns, not just testimonials. A real service can show you trackers with applications, replies, and outcomes.' },
@@ -441,6 +517,8 @@ export const NICHES: Niche[] = [
       { q: 'Is the search discreet?', a: 'Yes. Executive searches are handled with full discretion. No public postings, no mass outreach. Every message is targeted and confidential.' },
       { q: 'Do you work with executive recruiters?', a: 'Yes. Part of the outreach is direct engagement with retained and contingency executive recruiters who cover your target level and industry.' },
       { q: 'What seniority levels do you cover?', a: 'Director, Senior Director, VP, SVP, and C-level. The live trackers above show real campaigns at the VP level.' },
+      { q: 'How is an executive search different from a standard managed search?', a: 'Lower volume, higher precision. Executive campaigns run fewer, deeply researched approaches to decision-makers and executive recruiters instead of daily application volume, and every message is written for that specific opportunity.' },
+      { q: 'How long does an executive job search take?', a: 'Longer than mid-level searches. VP and C-level roles have smaller pools and slower processes, so four to six months is a realistic window even with strong, consistent execution.' },
     ],
   },
   {
@@ -469,6 +547,8 @@ export const NICHES: Niche[] = [
       { q: 'Do you understand engineering roles and tech stacks?', a: 'Yes. I have run campaigns for backend, fullstack, and software engineering roles. The live tracker above shows a real search.' },
       { q: 'Can you tailor applications to specific tech stacks?', a: 'Yes. Applications are written to match the stack and tools listed in each job description. No generic resumes.' },
       { q: 'Do you reach out to technical recruiters?', a: 'Yes. Direct outreach to technical recruiters and engineering hiring managers is part of the daily execution, not an afterthought.' },
+      { q: 'Does this work for senior, staff, and principal engineers?', a: 'Yes. Senior-level engineering searches lean harder on direct outreach and precise scope targeting, since staff and principal roles are fewer and often filled before they are widely posted.' },
+      { q: 'Can you handle high-competition markets with hundreds of applicants per role?', a: 'That is exactly the problem the process is built for. Tailored applications plus direct outreach to the hiring manager give you two paths into a process where a portal application alone gets buried.' },
     ],
   },
 ];

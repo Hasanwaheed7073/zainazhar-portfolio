@@ -29,10 +29,36 @@ export const metadata: Metadata = {
   },
 };
 
+function formatDate(iso: string) {
+  return new Date(`${iso}T00:00:00Z`).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    timeZone: 'UTC',
+  });
+}
+
 export default function BlogIndexPage() {
   const posts = [...POSTS].sort((a, b) => (a.date < b.date ? 1 : -1));
+  const blogJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Blog',
+    name: 'Reverse Recruiting Blog — Zain Azhar',
+    url: 'https://zainazhar.vercel.app/blog',
+    description: 'Plain guides on reverse recruiting and the done-for-you job search.',
+    author: { '@type': 'Person', name: 'Zain Azhar', url: 'https://zainazhar.vercel.app' },
+    blogPost: posts.map((post) => ({
+      '@type': 'BlogPosting',
+      headline: post.h1,
+      url: `https://zainazhar.vercel.app/blog/${post.slug}`,
+      datePublished: post.date,
+      dateModified: post.updated ?? post.date,
+      author: { '@type': 'Person', name: 'Zain Azhar' },
+    })),
+  };
   return (
     <main id="main-content" tabIndex={-1}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(blogJsonLd) }} />
       <section className="bg-surface">
         <Container as="div" className="section-pad">
           <div className="max-w-prose-wide">
@@ -46,6 +72,9 @@ export default function BlogIndexPage() {
                 <li key={post.slug} className="border-t border-line pt-6">
                   <Link href={`/blog/${post.slug}`} className="group block">
                     <h2 className="text-h2 font-semibold text-navy">{post.h1}</h2>
+                    <p className="mt-2 text-small text-ink-soft">
+                      <time dateTime={post.updated ?? post.date}>{formatDate(post.updated ?? post.date)}</time>
+                    </p>
                     <p className="mt-3 text-body text-ink-muted">{post.description}</p>
                     <span className="mt-3 inline-block text-small font-medium text-navy">Read</span>
                   </Link>

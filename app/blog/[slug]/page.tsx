@@ -8,6 +8,15 @@ export function generateStaticParams() {
   return POSTS.map((post) => ({ slug: post.slug }));
 }
 
+function formatDate(iso: string) {
+  return new Date(`${iso}T00:00:00Z`).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    timeZone: 'UTC',
+  });
+}
+
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const post = POSTS.find((p) => p.slug === slug);
@@ -24,7 +33,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       url,
       type: 'article',
       publishedTime: `${post.date}T00:00:00+00:00`,
-      modifiedTime: `${post.date}T00:00:00+00:00`,
+      modifiedTime: `${post.updated ?? post.date}T00:00:00+00:00`,
       authors: ['Zain Azhar'],
       section: 'Career Services',
       tags: post.keywords,
@@ -49,9 +58,20 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     headline: post.h1,
     description: post.description,
     datePublished: post.date,
-    dateModified: post.date,
-    author: { '@type': 'Person', name: 'Zain Azhar', url: 'https://zainazhar.vercel.app' },
+    dateModified: post.updated ?? post.date,
+    author: {
+      '@type': 'Person',
+      name: 'Zain Azhar',
+      url: 'https://zainazhar.vercel.app',
+      sameAs: ['https://www.linkedin.com/in/zainazhar/'],
+    },
+    publisher: { '@type': 'Person', name: 'Zain Azhar', url: 'https://zainazhar.vercel.app' },
+    image: 'https://zainazhar.vercel.app/opengraph-image',
     mainEntityOfPage: url,
+    speakable: {
+      '@type': 'SpeakableSpecification',
+      cssSelector: ['h1', 'article p'],
+    },
   };
   const breadcrumbJsonLd = {
     '@context': 'https://schema.org',
@@ -89,15 +109,69 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             </p>
             <h1 className="mt-5 text-display font-semibold text-navy">{post.h1}</h1>
             <p className="mt-6 text-lead text-ink-muted">{post.dek}</p>
+            <p className="mt-4 text-small text-ink-soft">
+              By Zain Azhar · Published{' '}
+              <time dateTime={post.date}>{formatDate(post.date)}</time>
+              {post.updated && post.updated !== post.date && (
+                <>
+                  {' '}· Updated <time dateTime={post.updated}>{formatDate(post.updated)}</time>
+                </>
+              )}
+            </p>
 
             <div className="mt-10 space-y-6">
-              {post.body.map((block, i) =>
-                block.type === 'h2' ? (
-                  <h2 key={i} className="text-h2 font-semibold text-navy">{block.text}</h2>
-                ) : (
-                  <p key={i} className="text-body text-ink-muted">{block.text}</p>
-                )
-              )}
+              {post.body.map((block, i) => {
+                if (block.type === 'h2') {
+                  return <h2 key={i} className="text-h2 font-semibold text-navy">{block.text}</h2>;
+                }
+                if (block.type === 'ul') {
+                  return (
+                    <ul key={i} className="list-disc space-y-2 pl-6 text-body text-ink-muted">
+                      {block.items.map((item, j) => (
+                        <li key={j}>{item}</li>
+                      ))}
+                    </ul>
+                  );
+                }
+                if (block.type === 'table') {
+                  return (
+                    <div key={i} className="overflow-x-auto">
+                      <table className="w-full border-collapse text-small text-ink-muted">
+                        <caption className="mb-2 text-left text-small font-medium text-ink-soft">{block.caption}</caption>
+                        <thead>
+                          <tr>
+                            {block.headers.map((h, j) => (
+                              <th key={j} scope="col" className="border border-line bg-surface-alt px-4 py-3 text-left font-semibold text-navy">
+                                {h}
+                              </th>
+                            ))}
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {block.rows.map((row, j) => (
+                            <tr key={j}>
+                              {row.map((cell, k) => (
+                                <td key={k} className="border border-line px-4 py-3 align-top">{cell}</td>
+                              ))}
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  );
+                }
+                if (block.type === 'cite') {
+                  return (
+                    <p key={i} className="border-l-2 border-line pl-4 text-body text-ink-muted">
+                      {block.text}{' '}
+                      <a href={block.href} target="_blank" rel="noopener noreferrer" className="underline hover:text-navy transition-opacity duration-apple">
+                        ({block.source})
+                      </a>
+                    </p>
+                  );
+                }
+                return <p key={i} className="text-body text-ink-muted">{block.text}</p>;
+              })}
             </div>
 
             <div className="mt-10">

@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Container } from '@/components/shared/Container';
 import { Reveal } from '@/components/shared/Reveal';
+import { ResponsiveDetails } from '@/components/shared/ResponsiveDetails';
 
 type TrackerLink = { label: string; href: string };
 
@@ -72,49 +73,35 @@ function CategoryBlock({
 }) {
   return (
     <div className="mt-12 lg:mt-16">
-      {/* Mobile Accordion View */}
-      <details className="group lg:hidden">
-        <summary className="flex cursor-pointer items-end justify-between gap-6 border-b border-line pb-4 [&::-webkit-details-marker]:hidden">
-          <h3 className="text-h3 font-semibold text-navy">{title}</h3>
-          {crossLink && (
-            <Link href={crossLink.href} className="mt-1 inline-flex items-center gap-1 text-small font-medium text-navy-500 hover:text-navy transition-opacity duration-apple">
-              {crossLink.label} <span aria-hidden="true">→</span>
-            </Link>
-          )}
-          <div className="flex items-center gap-3">
-            <p className="text-small text-ink-muted">{items.length} live trackers</p>
-            <span
-              aria-hidden="true"
-              className="text-h3 font-light text-navy-500 transition-transform duration-apple group-open:rotate-45"
-            >
-              +
-            </span>
-          </div>
-        </summary>
-        <ul className="mt-6 grid grid-cols-1 gap-3">
-          {items.map((item) => (
-            <LinkRow key={item.href} item={item} />
-          ))}
-        </ul>
-      </details>
-
-      {/* Desktop Always-Open View */}
-      <div className="hidden lg:block">
-        <div className="flex items-end justify-between gap-6 border-b border-line pb-4">
-          <h3 className="text-h3 font-semibold text-navy">{title}</h3>
-          {crossLink && (
-            <Link href={crossLink.href} className="mt-1 inline-flex items-center gap-1 text-small font-medium text-navy-500 hover:text-navy transition-opacity duration-apple">
-              {crossLink.label} <span aria-hidden="true">→</span>
-            </Link>
-          )}
-          <p className="text-small text-ink-muted">{items.length} live trackers</p>
-        </div>
+      {/* Single render — SSR open for crawlers, collapses on mobile after hydration */}
+      <ResponsiveDetails
+        className="group"
+        summary={
+          <summary className="flex cursor-pointer items-end justify-between gap-6 border-b border-line pb-4 lg:pointer-events-none [&::-webkit-details-marker]:hidden">
+            <h3 className="text-h3 font-semibold text-navy">{title}</h3>
+            {crossLink && (
+              <Link href={crossLink.href} className="pointer-events-auto mt-1 inline-flex items-center gap-1 text-small font-medium text-navy-500 hover:text-navy transition-opacity duration-apple">
+                {crossLink.label} <span aria-hidden="true">→</span>
+              </Link>
+            )}
+            <div className="flex items-center gap-3">
+              <p className="text-small text-ink-muted">{items.length} live trackers</p>
+              <span
+                aria-hidden="true"
+                className="text-h3 font-light text-navy-500 transition-transform duration-apple group-open:rotate-45 lg:hidden"
+              >
+                +
+              </span>
+            </div>
+          </summary>
+        }
+      >
         <ul className="mt-6 grid grid-cols-1 gap-3 md:grid-cols-2">
           {items.map((item) => (
             <LinkRow key={item.href} item={item} />
           ))}
         </ul>
-      </div>
+      </ResponsiveDetails>
     </div>
   );
 }

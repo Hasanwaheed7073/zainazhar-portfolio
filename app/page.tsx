@@ -38,6 +38,7 @@ const PERSON_JSONLD = {
   telephone: '+923087823424',
   sameAs: [
     'https://www.linkedin.com/in/zainazhar/',
+    'https://x.com/zainazhar',
   ],
   address: BUSINESS_ADDRESS,
   areaServed: AREA_SERVED,
