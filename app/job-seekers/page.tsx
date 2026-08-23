@@ -4,6 +4,7 @@ import { JobSeekerHow } from '@/components/sections/JobSeekerHow';
 import { JobSeekerCta } from '@/components/sections/JobSeekerCta';
 import { TrustBar } from '@/components/sections/TrustBar';
 import { Proof } from '@/components/sections/Proof';
+import { SITE_URL, PERSON_ID, SAME_AS } from '@/lib/schema';
 
 export const metadata: Metadata = {
   title: 'Reverse Recruiter for US Job Seekers',
@@ -37,12 +38,16 @@ export const metadata: Metadata = {
 const SERVICE_JSONLD = {
   '@context': 'https://schema.org',
   '@type': 'Service',
+  '@id': `${SITE_URL}/job-seekers#service`,
   name: 'Managed Job Search for Individuals',
   description: 'A reverse recruiting service for individual job seekers. Daily applications, recruiter and hiring manager outreach, follow-ups, and weekly reporting.',
+  url: `${SITE_URL}/job-seekers`,
   provider: {
     '@type': 'Person',
+    '@id': PERSON_ID,
     name: 'Zain Azhar',
-    url: 'https://zainazhar.vercel.app',
+    url: SITE_URL,
+    sameAs: SAME_AS,
   },
   areaServed: ['United States', 'United Kingdom', 'Canada'],
   serviceType: 'Reverse Recruiting',

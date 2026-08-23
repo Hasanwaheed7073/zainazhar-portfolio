@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Container } from '@/components/shared/Container';
 import { POSTS } from '@/lib/content';
+import { SITE_URL, PERSON_ID, SAME_AS } from '@/lib/schema';
 
 export function generateStaticParams() {
   return POSTS.map((post) => ({ slug: post.slug }));
@@ -61,11 +62,12 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     dateModified: post.updated ?? post.date,
     author: {
       '@type': 'Person',
+      '@id': PERSON_ID,
       name: 'Zain Azhar',
-      url: 'https://zainazhar.vercel.app',
-      sameAs: ['https://www.linkedin.com/in/zainazhar/'],
+      url: SITE_URL,
+      sameAs: SAME_AS,
     },
-    publisher: { '@type': 'Person', name: 'Zain Azhar', url: 'https://zainazhar.vercel.app' },
+    publisher: { '@type': 'Person', '@id': PERSON_ID, name: 'Zain Azhar', url: SITE_URL, sameAs: SAME_AS },
     image: 'https://zainazhar.vercel.app/opengraph-image',
     mainEntityOfPage: url,
     speakable: {

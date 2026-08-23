@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Container } from '@/components/shared/Container';
 import { NICHES } from '@/lib/content';
+import { SITE_URL, PERSON_ID, SAME_AS } from '@/lib/schema';
 
 export function generateStaticParams() {
   return NICHES.map((niche) => ({ niche: niche.slug }));
@@ -36,9 +37,10 @@ export default async function NichePage({ params }: { params: Promise<{ niche: s
   const serviceJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Service',
+    '@id': `${url}#service`,
     name: data.h1,
     description: data.description,
-    provider: { '@type': 'Person', name: 'Zain Azhar', url: 'https://zainazhar.vercel.app' },
+    provider: { '@type': 'Person', '@id': PERSON_ID, name: 'Zain Azhar', url: SITE_URL, sameAs: SAME_AS },
     areaServed: ['United States', 'United Kingdom', 'Canada'],
     serviceType: 'Reverse Recruiting',
     url,
