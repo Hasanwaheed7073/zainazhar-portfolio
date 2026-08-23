@@ -33,7 +33,8 @@ export function Footer() {
               <li><Link href="/job-seekers" className="hover:text-navy transition-opacity duration-apple">For Job Seekers</Link></li>
               <li><Link href="/blog" className="hover:text-navy transition-opacity duration-apple">Blog</Link></li>
               <li><Link href="/reverse-recruiter" className="hover:text-navy transition-opacity duration-apple">Reverse Recruiter by Field</Link></li>
-              <li><Link href="/#contact" className="hover:text-navy transition-opacity duration-apple">Contact</Link></li>
+              <li><Link href="/about" className="hover:text-navy transition-opacity duration-apple">About</Link></li>
+              <li><Link href="/contact" className="hover:text-navy transition-opacity duration-apple">Contact</Link></li>
             </ul>
           </div>
 
@@ -62,7 +63,11 @@ export function Footer() {
 
         <div className="mt-12 flex flex-col items-start justify-between gap-3 border-t border-line pt-6 md:flex-row md:items-center">
           <p className="text-small text-ink-soft">© {year} Zain Azhar. All rights reserved.</p>
-          <p className="text-small text-ink-soft">Built for career coaches who care about execution.</p>
+          <ul className="flex flex-wrap items-center gap-x-5 gap-y-2 text-small text-ink-soft">
+            <li><Link href="/privacy" className="hover:text-navy transition-opacity duration-apple">Privacy</Link></li>
+            <li><Link href="/developers" className="hover:text-navy transition-opacity duration-apple">For AI agents</Link></li>
+            <li><a href="/llms.txt" className="font-mono hover:text-navy transition-opacity duration-apple">llms.txt</a></li>
+          </ul>
         </div>
       </Container>
     </footer>

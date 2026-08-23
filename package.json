@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "node --test tests/",
+    "test:ci": "npm run build && node --test tests/"
   },
   "dependencies": {
     "@base-ui/react": "^1.4.1",

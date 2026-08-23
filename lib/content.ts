@@ -6,6 +6,37 @@ export const SITE = {
   url: 'https://zainazhar.vercel.app',
 } as const;
 
+/**
+ * Homepage FAQ. Lives here rather than in the Faq component so the markdown
+ * renderer and MCP server can read it without importing React.
+ */
+export const FAQ_ITEMS = [
+  {
+    q: 'How does the white-label partnership work?',
+    a: 'I operate fully behind your brand. Communication, trackers, and reporting can use your templates and your client-facing language. To your clients, the entire experience looks like one team. To you, it looks like a senior execution partner who never adds to your workload.',
+  },
+  {
+    q: 'How many clients can you handle at once?',
+    a: 'Capacity is intentionally controlled. I take on a finite number of active execution slots at any time so quality and follow-through never slip. We discuss exact volume on the partner call based on your roster and target outcomes.',
+  },
+  {
+    q: 'What industries do you specialize in?',
+    a: 'Healthcare and clinical roles, technology and engineering, product and marketing, customer success and revenue functions, and executive search across the United States, United Kingdom, and Canada. Live trackers in the proof section show the actual mix.',
+  },
+  {
+    q: 'How is progress reported?',
+    a: 'Live trackers update daily and a written summary lands every Friday. Applications sent, replies received, interviews scheduled, offers in motion. Coaches and clients always have a single source of truth, so review calls become decision calls instead of status updates.',
+  },
+  {
+    q: 'What does pricing look like?',
+    a: 'Pricing is structured per active client slot, with options for retainer or hybrid models depending on your coaching business. The 30-minute partner call is the right place to share specifics, since the right structure depends on your client volume and seniority mix.',
+  },
+  {
+    q: 'How is client confidentiality maintained?',
+    a: 'Every engagement runs under written confidentiality. Client data sits in access-controlled documents, sharing is permission based, and trackers can be locked down to coach-only visibility on request. Privacy is a default, not a feature.',
+  },
+] as const;
+
 export type PostBlock =
   | { type: 'h2' | 'p'; text: string }
   | { type: 'ul'; items: string[] }
